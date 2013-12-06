@@ -3,7 +3,8 @@ yum-centos Cookbook
 
 The yum-centos cookbook takes over management of the default
 repositoryids that ship with CentOS systems. It allows attribute
-manipulation of base updates extras centosplus contrib.
+manipulation of `base`, `updates`, `extras`, `centosplus`, and
+`contrib`.
 
 Requirements
 ------------
