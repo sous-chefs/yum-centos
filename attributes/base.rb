@@ -5,4 +5,9 @@ default['yum']['base']['mirrorlist'] = 'http://mirrorlist.centos.org/?release=$r
 default['yum']['base']['description'] = 'CentOS-$releasever - Base'
 default['yum']['base']['enabled'] = true
 default['yum']['base']['gpgcheck'] = true
-default['yum']['base']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6'
+case node['platform_version'].to_i
+when 5
+  default['yum']['base']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5'
+when 6
+  default['yum']['base']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6'
+end
