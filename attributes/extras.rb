@@ -1,5 +1,3 @@
-# Encoding: utf-8
-
 default['yum']['extras']['repositoryid'] = 'extras'
 default['yum']['extras']['description'] = 'CentOS-$releasever - Extras'
 default['yum']['extras']['mirrorlist'] = 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras'

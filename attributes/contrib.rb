@@ -1,5 +1,3 @@
-# Encoding: utf-8
-
 default['yum']['contrib']['repositoryid'] = 'contrib'
 default['yum']['contrib']['description'] = 'CentOS-$releasever - Contrib'
 default['yum']['contrib']['mirrorlist'] = 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=contrib'
