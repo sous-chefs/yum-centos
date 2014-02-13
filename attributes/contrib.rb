@@ -2,6 +2,7 @@ default['yum']['contrib']['repositoryid'] = 'contrib'
 default['yum']['contrib']['description'] = 'CentOS-$releasever - Contrib'
 default['yum']['contrib']['mirrorlist'] = 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=contrib'
 default['yum']['contrib']['enabled'] = false
+default['yum']['contrib']['managed'] = false
 default['yum']['contrib']['gpgcheck'] = true
 case node['platform_version'].to_i
 when 5
