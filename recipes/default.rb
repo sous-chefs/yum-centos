@@ -34,7 +34,7 @@ end
 
 %w{ base updates extras centosplus contrib }.each do |repo|
   if node['yum'][repo]['managed']
-    yum_repository repo do      
+    yum_repository repo do
       description node['yum'][repo]['description']
       baseurl node['yum'][repo]['baseurl']
       mirrorlist node['yum'][repo]['mirrorlist']
