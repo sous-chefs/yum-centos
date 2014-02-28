@@ -16,19 +16,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-file '/etc/yum.repos.d/CentOS-Base' do
+file '/etc/yum.repos.d/CentOS-Base.repo' do
   action :delete
 end
 
-file '/etc/yum.repos.d/CentOS-Debuginfo' do
+file '/etc/yum.repos.d/CentOS-Debuginfo.repo' do
   action :delete
 end
 
-file '/etc/yum.repos.d/CentOS-Media' do
+file '/etc/yum.repos.d/CentOS-Media.repo' do
   action :delete
 end
 
-file '/etc/yum.repos.d/CentOS-Vault' do
+file '/etc/yum.repos.d/CentOS-Vault.repo' do
   action :delete
 end
 
