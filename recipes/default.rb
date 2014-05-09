@@ -16,20 +16,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-file '/etc/yum.repos.d/CentOS-Base.repo' do
-  action :delete
+directory '/etc/yum.repos.d' do
+  owner 'root'
+  group 'root'
+  mode '0755'
+  not_if { ::Dir.exists?('/etc/yum.repos.d') }
 end
 
-file '/etc/yum.repos.d/CentOS-Debuginfo.repo' do
-  action :delete
-end
-
-file '/etc/yum.repos.d/CentOS-Media.repo' do
-  action :delete
-end
-
-file '/etc/yum.repos.d/CentOS-Vault.repo' do
-  action :delete
+%w{CentOS-Base CentOS-Debuginfo CentOS-Media CentOS-Vault}.each do |name|
+  file "/etc/yum.repos.d/#{name}.repo" do
+    action :delete
+    only_if { ::File.exists?("/etc/yum.repos.d/#{name}.repo") }
+  end
 end
 
 %w{ base updates extras centosplus contrib }.each do |repo|
