@@ -9,24 +9,24 @@ describe 'yum-centos::default' do
         node.set['yum']['extras']['managed'] = true
         node.set['yum']['centosplus']['managed'] = true
         node.set['yum']['contrib']['managed'] = true
-      end.converge(described_recipe)
+      end.converge('yum-centos::default')
     end
 
     context 'removing stock configuration files' do
-      it 'deletes file[/etc/yum.repos.d/CentOS-Base]' do
-        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Base')
+      it 'deletes file[/etc/yum.repos.d/CentOS-Base.repo]' do
+        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Base.repo')
       end
 
-      it 'deletes file[/etc/yum.repos.d/CentOS-Debuginfo]' do
-        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Debuginfo')
+      it 'deletes file[/etc/yum.repos.d/CentOS-Debuginfo.repo]' do
+        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Debuginfo.repo')
       end
 
-      it 'deletes file[/etc/yum.repos.d/CentOS-Media]' do
-        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Media')
+      it 'deletes file[/etc/yum.repos.d/CentOS-Media.repo]' do
+        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Media.repo')
       end
 
-      it 'deletes yum_repository[CentOS-Vault]' do
-        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Vault')
+      it 'deletes yum_repository[CentOS-Vault.repo]' do
+        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Vault.repo')
       end
     end
 
