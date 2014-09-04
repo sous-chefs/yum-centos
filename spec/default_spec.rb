@@ -31,7 +31,7 @@ describe 'yum-centos::default' do
     end
 
     context 'rendering centos yum channel repositories' do
-      %w{ base updates extras centosplus contrib}.each do |repo|
+      %w(      base updates extras centosplus contrib      ).each do |repo|
         it "creates yum_repository[#{repo}]" do
           expect(chef_run).to create_yum_repository(repo)
         end
