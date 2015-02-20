@@ -9,6 +9,7 @@ describe 'yum-centos::default' do
         node.set['yum']['extras']['managed'] = true
         node.set['yum']['centosplus']['managed'] = true
         node.set['yum']['contrib']['managed'] = true
+        node.set['yum']['fasttrack']['managed'] = true
       end.converge('yum-centos::default')
     end
 
@@ -28,10 +29,14 @@ describe 'yum-centos::default' do
       it 'deletes yum_repository[CentOS-Vault.repo]' do
         expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Vault.repo')
       end
+
+      it 'deletes yum_repository[CentOS-fasttrack.repo]' do
+        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-fasttrack.repo')
+      end
     end
 
     context 'rendering centos yum channel repositories' do
-      %w(      base updates extras centosplus contrib      ).each do |repo|
+      %w(      base updates extras centosplus contrib fasttrack      ).each do |repo|
         it "creates yum_repository[#{repo}]" do
           expect(chef_run).to create_yum_repository(repo)
         end
