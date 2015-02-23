@@ -2,6 +2,10 @@ yum-centos Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+v0.4.0 (2015-02-22)
+-------------------
+- Adding fasttrack repo management
+
 v0.3.0 (2014-09-02)
 -------------------
 - Add all attribute available to LWRP to allow for tuning
