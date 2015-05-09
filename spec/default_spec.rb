@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'yum-centos::default' do
   context 'yum-centos::default uses default attributes' do
     let(:chef_run) do
-      ChefSpec::Runner.new do |node|
+      ChefSpec::Runner.new(platform: 'centos', version: '7.0') do |node|
         node.set['yum']['base']['managed'] = true
         node.set['yum']['updates']['managed'] = true
         node.set['yum']['extras']['managed'] = true
