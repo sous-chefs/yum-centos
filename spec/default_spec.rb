@@ -42,6 +42,5 @@ describe 'yum-centos::default' do
         end
       end
     end
-
   end
 end
