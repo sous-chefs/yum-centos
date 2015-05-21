@@ -36,7 +36,7 @@ file '/etc/yum.repos.d/CentOS-fasttrack.repo' do
   action :delete
 end
 
-%w(base updates extras centosplus contrib fasttrack).each do |repo|
+node['yum-centos']['repos'].each do |repo|
   if node['yum'][repo]['managed']
     yum_repository repo do
       baseurl node['yum'][repo]['baseurl']
