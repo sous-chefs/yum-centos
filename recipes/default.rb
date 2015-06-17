@@ -20,11 +20,19 @@ file '/etc/yum.repos.d/CentOS-Base.repo' do
   action :delete
 end
 
+file '/etc/yum.repos.d/CentOS-CR.repo' do
+  action :delete
+end
+
 file '/etc/yum.repos.d/CentOS-Debuginfo.repo' do
   action :delete
 end
 
 file '/etc/yum.repos.d/CentOS-Media.repo' do
+  action :delete
+end
+
+file '/etc/yum.repos.d/CentOS-Sources.repo' do
   action :delete
 end
 

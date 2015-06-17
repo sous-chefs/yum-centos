@@ -18,12 +18,20 @@ describe 'yum-centos::default' do
         expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Base.repo')
       end
 
+      it 'deletes yum_repository[CentOS-CR.repo]' do
+        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-CR.repo')
+      end
+
       it 'deletes file[/etc/yum.repos.d/CentOS-Debuginfo.repo]' do
         expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Debuginfo.repo')
       end
 
       it 'deletes file[/etc/yum.repos.d/CentOS-Media.repo]' do
         expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Media.repo')
+      end
+
+      it 'deletes yum_repository[CentOS-Sources.repo]' do
+        expect(chef_run).to delete_file('/etc/yum.repos.d/CentOS-Sources.repo')
       end
 
       it 'deletes yum_repository[CentOS-Vault.repo]' do
