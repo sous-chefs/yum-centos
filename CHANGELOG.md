@@ -2,9 +2,9 @@ yum-centos Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the yum-centos cookbook.
 
-v0.4.2 (2015-06-21)
+v0.4.3 (2015-06-21)
 -------------------
-- Removing repo files shipped in CentOS-7
+- Check for RHEL platform_family when installing repos
 
 v0.4.1 (2015-05-20)
 -------------------
