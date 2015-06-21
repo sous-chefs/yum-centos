@@ -82,6 +82,7 @@ node['yum-centos']['repos'].each do |repo|
       timeout node['yum'][repo]['timeout']
       username node['yum'][repo]['username']
 
+      only_if { platform_family?('rhel') }
       action :create
     end
   end
