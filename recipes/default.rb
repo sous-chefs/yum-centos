@@ -16,33 +16,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-file '/etc/yum.repos.d/CentOS-Base.repo' do
-  action :delete
-end
+::Dir["/etc/yum.repos.d/CentOS-*"].select {|f| file f do action :delete end}
 
-file '/etc/yum.repos.d/CentOS-CR.repo' do
-  action :delete
-end
-
-file '/etc/yum.repos.d/CentOS-Debuginfo.repo' do
-  action :delete
-end
-
-file '/etc/yum.repos.d/CentOS-Media.repo' do
-  action :delete
-end
-
-file '/etc/yum.repos.d/CentOS-Sources.repo' do
-  action :delete
-end
-
-file '/etc/yum.repos.d/CentOS-Vault.repo' do
-  action :delete
-end
-
-file '/etc/yum.repos.d/CentOS-fasttrack.repo' do
-  action :delete
-end
+node.default['yum-centos']['repos'] << value_for_platform(centos: {
+                                         '>= 7.0' => 'cr',
+                                         '< 7.0' => 'contrib'
+                                     })
 
 node['yum-centos']['repos'].each do |repo|
   if node['yum'][repo]['managed']

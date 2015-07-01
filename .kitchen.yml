@@ -3,6 +3,8 @@ driver:
 
 provisioner:
   name: chef_zero
+  data_path: test/shared
+
 
 platforms:
   - name: centos-5.11
@@ -13,3 +15,20 @@ suites:
   - name: default
     run_list:
       - recipe[yum-centos::default]
+  - name: all
+    run_list:
+      - recipe[yum-centos::default]
+    attributes:
+      yum:
+        contrib:
+          managed: true
+          enabled: true
+        centosplus:
+          managed: true
+          enabled: true
+        fasttrack:
+          managed: true
+          enabled: true
+        cr:
+          managed: true
+          enabled: true
