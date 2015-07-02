@@ -1,7 +1,7 @@
+#<% require 'kitchen-sync' %>
 ---
 driver_config:
-  digitalocean_client_id: <%= ENV['DIGITAL_OCEAN_CLIENT_ID'] %>
-  digitalocean_api_key: <%= ENV['DIGITAL_OCEAN_API_KEY'] %>
+  digitalocean_access_token: <%= ENV['DIGITALOCEAN_API_TOKEN'] %>
 
 provisioner:
   name: chef_zero
@@ -11,29 +11,29 @@ platforms:
 - name: centos-5.8
   driver_plugin: digitalocean
   driver_config:
-    image_id: 1601
-    flavor_id: 63
-    region_id: 4
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-    ssh_key: <%= ENV['DIGITAL_OCEAN_SSH_KEY_PATH'] %>
+    size: 2gb
+    image: centos-5-8-x64
+    region: <%= ENV['DIGITALOCEAN_REGION'] %>
+    ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEYS'] %>
+    ssh_key: <%= ENV['DIGITALOCEAN_SSH_KEY_PATH'] %>
 
-- name: centos-6.4
+- name: centos-6.5
   driver_plugin: digitalocean
   driver_config:
-    image_id: 562354
-    flavor_id: 63
-    region_id: 4
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-    ssh_key: <%= ENV['DIGITAL_OCEAN_SSH_KEY_PATH'] %>
+    size: 2gb
+    image: centos-6-5-x64
+    region: <%= ENV['DIGITALOCEAN_REGION'] %>
+    ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEYS'] %>
+    ssh_key: <%= ENV['DIGITALOCEAN_SSH_KEY_PATH'] %>
 
 - name: centos-7.0
   driver_plugin: digitalocean
   driver_config:
-    image_id: 4856048
-    flavor_id: 63
-    region_id: 4
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-    ssh_key: <%= ENV['DIGITAL_OCEAN_SSH_KEY_PATH'] %>
+    size: 2gb
+    image: centos-7-0-x64
+    region: <%= ENV['DIGITALOCEAN_REGION'] %>
+    ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEYS'] %>
+    ssh_key: <%= ENV['DIGITALOCEAN_SSH_KEY_PATH'] %>
 
 suites:
 - name: default
