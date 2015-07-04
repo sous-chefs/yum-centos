@@ -20,7 +20,7 @@
 
 node.default['yum-centos']['repos'] << value_for_platform(centos: {
                                          '>= 7.0' => 'cr',
-                                         '< 7.0' => 'contrib'
+                                         :default => 'contrib'
                                      })
 
 node['yum-centos']['repos'].each do |repo|
