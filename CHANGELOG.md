@@ -2,6 +2,10 @@ yum-centos Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+v0.4.5 (2015-07-03)
+-------------------
+- contrib fix for < 7.0
+
 v0.4.4 (2015-07-02)
 -------------------
 - #11 - Fix CentOS 7 support and refactor tests to use server spec
