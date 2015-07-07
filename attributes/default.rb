@@ -1,1 +1,1 @@
-default['yum-centos']['repos'] = %w(base updates extras centosplus fasttrack)
+default['yum-centos']['repos'] = %w(base updates extras centosplus fasttrack cloud)
