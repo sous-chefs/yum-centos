@@ -21,7 +21,7 @@
 node.default['yum-centos']['repos'] << value_for_platform(centos: {
                                          '>= 7.0' => 'cr',
                                          :default => 'contrib'
-                                     })
+                                     }) if node.platform?('centos')
 
 node['yum-centos']['repos'].each do |repo|
   if node['yum'][repo]['managed']
