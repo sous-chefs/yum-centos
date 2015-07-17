@@ -2,6 +2,10 @@ yum-centos Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+v0.4.6 (2015-07-17)
+-------------------
+- Fixing attribute precedence bug
+
 v0.4.5 (2015-07-03)
 -------------------
 - contrib fix for < 7.0
