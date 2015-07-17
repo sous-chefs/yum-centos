@@ -18,11 +18,6 @@
 
 ::Dir["/etc/yum.repos.d/CentOS-*"].select {|f| file f do action :delete end}
 
-node.default['yum-centos']['repos'] << value_for_platform(centos: {
-                                         '>= 7.0' => 'cr',
-                                         :default => 'contrib'
-                                     })
-
 node['yum-centos']['repos'].each do |repo|
   if node['yum'][repo]['managed']
     yum_repository repo do
