@@ -1,5 +1,7 @@
 yum-centos Cookbook
 ============
+[![Build Status](https://travis-ci.org/chef-cookbooks/yum-centos.svg?branch=master)](http://travis-ci.org/chef-cookbooks/yum-centos)
+[![Cookbook Version](https://img.shields.io/cookbook/v/yum-centos.svg)](https://supermarket.chef.io/cookbooks/yum-centos)
 
 The yum-centos cookbook takes over management of the default
 repositoryids that ship with CentOS systems. It allows attribute
