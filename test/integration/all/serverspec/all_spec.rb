@@ -28,10 +28,10 @@ describe 'yum-centos::default' do
   context 'veryfing centos yum channel repositories' do
     repos = %w(base updates extras centosplus fasttrack)
     repos << case host_inventory['platform_version'][/(^\d+\.\d+)/]
-               when '7.0'
-                 'cr'
-               else
-                 'contrib'
+             when '7.0'
+               'cr'
+             else
+               'contrib'
              end
     repos.each do |repo|
       describe file("/etc/yum.repos.d/#{repo}.repo") do

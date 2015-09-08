@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-::Dir["/etc/yum.repos.d/CentOS-*"].select {|f| file f do action :delete end}
+::Dir['/etc/yum.repos.d/CentOS-*'].select { |f| file f do action :delete end }
 
 node['yum-centos']['repos'].each do |repo|
   if node['yum'][repo]['managed']
