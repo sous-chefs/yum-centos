@@ -5,11 +5,10 @@ provisioner:
   name: chef_zero
   data_path: test/shared
 
-
 platforms:
   - name: centos-5.11
-  - name: centos-6.6
-  - name: centos-7.0
+  - name: centos-6.7
+  - name: centos-7.1
 
 suites:
   - name: default
