@@ -2,6 +2,20 @@ yum-centos Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+v0.4.7 (2015-09-22)
+-------------------
+- Added source_url and issues_url metadata
+- Added the standard chef rubocop config
+- Added standard Chef gitignore and chefignore files
+- Add Travis CI and cookbook version badges in the readme
+- Expand the requirements section in the readme
+- Update contributing, maintainers, and testing docs
+- Add standard Gemfile with testing and development dependencies
+- Update distro versions in the Kitchen config
+- Update berksfile API endpoint
+- Add platform support to metadata
+- Add long_desciption to metadata
+
 v0.4.6 (2015-07-17)
 -------------------
 - Fixing attribute precedence bug
