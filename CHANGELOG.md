@@ -2,6 +2,11 @@ yum-centos Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+v0.4.9 (2015-10-27)
+-------------------
+- Cleaning up Chef 13 deprecation warnings by not passing nil into
+  yum_repository properties
+
 v0.4.8 (2015-10-27)
 -------------------
 - Adding redhat platform to attributes file
