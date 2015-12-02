@@ -2,6 +2,10 @@ yum-centos Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+v0.4.10 (2015-12-01)
+--------------------
+- Updating if/unless logic in recipes
+
 v0.4.9 (2015-10-27)
 -------------------
 - Cleaning up Chef 13 deprecation warnings by not passing nil into
