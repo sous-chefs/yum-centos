@@ -1,4 +1,8 @@
-require_relative '../../../kitchen/data/spec_helper'
+require 'serverspec'
+
+set :backend, :exec
+
+puts "os: #{os}"
 
 describe 'yum-centos::default' do
   context 'deleting default yum channel repositories' do

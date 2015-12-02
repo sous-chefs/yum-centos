@@ -1,4 +1,8 @@
-require_relative '../../../kitchen/data/spec_helper'
+require 'serverspec'
+
+set :backend, :exec
+
+puts "os: #{os}"
 
 describe 'yum-centos::default' do
   context 'deleting default yum channel repositories' do
@@ -28,7 +32,7 @@ describe 'yum-centos::default' do
   context 'veryfing centos yum channel repositories' do
     repos = %w(base updates extras centosplus fasttrack)
     repos << case host_inventory['platform_version'][/(^\d+\.\d+)/]
-             when '7.0'
+             when /7./
                'cr'
              else
                'contrib'
