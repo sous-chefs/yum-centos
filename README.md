@@ -94,7 +94,7 @@ default['yum']['fasttrack']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Cen
 ## Usage Example
 To disable the CentOS Extras repository through a Role or Environment definition
 
-```
+```ruby
 default_attributes(
   :yum => {
     :extras => {
@@ -108,7 +108,7 @@ default_attributes(
 
 Uncommonly used repositoryids are not managed by default. This is speeds up integration testing pipelines by avoiding yum-cache builds that nobody cares about. To enable the CentOS Plus repository with a wrapper cookbook, place the following in a recipe:
 
-```
+```ruby
 node.default['yum']['centosplus']['managed'] = true
 node.default['yum']['centosplus']['enabled'] = true
 include_recipe 'yum-centos'
@@ -117,7 +117,7 @@ include_recipe 'yum-centos'
 ## More Examples
 Point the base and updates repositories at an internally hosted server.
 
-```
+```ruby
 node.default['yum']['base']['enabled'] = true
 node.default['yum']['base']['mirrorlist'] = nil
 node.default['yum']['base']['baseurl'] = 'https://internal.example.com/centos/6/os/x86_64'
