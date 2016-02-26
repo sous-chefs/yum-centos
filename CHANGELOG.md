@@ -1,6 +1,9 @@
 # yum-centos Cookbook CHANGELOG
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## v0.4.12 (2015-12-07)
+- updated to actually utilize the `make_cache` option from the yum cookbook
+
 ## v0.4.11 (2015-12-07)
 - Use releasever yum variable for the path to the GPG key to avoid a case statement in the cookbook attributes file
 
