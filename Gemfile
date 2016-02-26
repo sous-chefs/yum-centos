@@ -11,25 +11,15 @@ group :lint do
 end
 
 group :unit do
-  gem 'berkshelf',  '~> 4.0'
+  gem 'berkshelf',  '~> 4.2'
   gem 'chefspec',   '~> 4.4'
 end
 
 group :kitchen_common do
-  gem 'test-kitchen', '~> 1.4'
+  gem 'test-kitchen', '~> 1.5'
 end
 
-group :kitchen_vagrant do
-  gem 'kitchen-vagrant', '~> 0.19'
-end
-
-group :development do
-  gem 'ruby_gntp'
-  gem 'growl'
-  gem 'rb-fsevent'
-  gem 'guard', '~> 2.4'
-  gem 'guard-kitchen'
-  gem 'guard-foodcritic'
-  gem 'guard-rspec'
-  gem 'guard-rubocop'
+group :kitchen do
+  gem 'kitchen-vagrant'
+  gem 'kitchen-dokken'
 end
