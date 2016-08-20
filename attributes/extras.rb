@@ -5,11 +5,4 @@ default['yum']['extras']['enabled'] = true
 default['yum']['extras']['make_cache'] = true
 default['yum']['extras']['managed'] = true
 default['yum']['extras']['gpgcheck'] = true
-case node['platform_version'].to_i
-when 5
-  default['yum']['extras']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5'
-when 6
-  default['yum']['extras']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6'
-when 7
-  default['yum']['extras']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7'
-end
+default['yum']['extras']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-$releasever'
