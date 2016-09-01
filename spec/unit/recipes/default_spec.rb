@@ -1,10 +1,8 @@
 require 'spec_helper'
 
-describe 'default recipe on Ubuntu 14.04' do
+describe 'yum-centos::default' do
   let(:chef_run) do
-    ChefSpec::ServerRunner.new do |node|
-      node.automatic[:lsb][:codename] = 'trusty'
-    end.converge('yum-centos::default')
+    ChefSpec::ServerRunner.converge(described_recipe)
   end
 
   it 'converges successfully' do
