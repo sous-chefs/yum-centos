@@ -12,7 +12,7 @@ The yum-centos cookbook takes over management of the default repositoryids that 
 
 ### Chef
 
-- Chef 11+
+- Chef 12+
 
 ### Cookbooks
 
