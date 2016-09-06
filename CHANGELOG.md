@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## 1.0.0 (2016-09-06)
+- Add chef_version metadata
+- Testing updates
+- Remove support for Chef 11
+- Generate the GPG path dynamically
+
 ## v0.4.13 (2016-07-22)
 
 - loosen the version dependency on yum to allow for newer versions
