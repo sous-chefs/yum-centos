@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## 2.0.0 (2016-11-25)
+- Replace yum dependency with compat_resource
+
 ## 1.0.0 (2016-09-06)
 - Add chef_version metadata
 - Testing updates
