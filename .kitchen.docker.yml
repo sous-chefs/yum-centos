@@ -1,6 +1,8 @@
 driver:
   name: dokken
-  chef_version: latest
+  privileged: true # because Docker and SystemD/Upstart
+  chef_image: chef/chef
+  chef_version: current
 
 transport:
   name: dokken
@@ -9,8 +11,7 @@ provisioner:
   name: dokken
 
 verifier:
-  root_path: '/opt/verifier'
-  sudo: false
+  name: inspec
 
 platforms:
 - name: centos-5
