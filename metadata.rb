@@ -9,6 +9,7 @@ version '2.1.0'
 depends 'compat_resource', '>= 12.16.3'
 
 supports 'centos'
+supports 'xenserver'
 
 source_url 'https://github.com/chef-cookbooks/yum-centos'
 issues_url 'https://github.com/chef-cookbooks/yum-centos/issues'
