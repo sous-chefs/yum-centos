@@ -1,6 +1,6 @@
 contrib = value_for_platform(%w(centos redhat) => {
                                '>= 7.0' => 'cr',
-                               :default => 'contrib'
+                               :default => 'contrib',
                              })
 
 default['yum-centos']['repos'] = %W(
