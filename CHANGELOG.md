@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## 2.1.0 (2016-12-22)
+
+- Allow the use of any valid property via attributes
+- Depend on the latest compat_resource cookbook
+- Cookstyle fixes
+
 ## 2.0.0 (2016-11-25)
 - Replace yum dependency with compat_resource
 
