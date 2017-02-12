@@ -20,10 +20,8 @@ services: docker
 
 env:
   matrix:
-    - INSTANCE=default-centos-5
     - INSTANCE=default-centos-6
     - INSTANCE=default-centos-7
-    - INSTANCE=all-centos-5
     - INSTANCE=all-centos-6
     - INSTANCE=all-centos-7
 

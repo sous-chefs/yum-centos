@@ -12,4 +12,4 @@ supports 'centos'
 
 source_url 'https://github.com/chef-cookbooks/yum-centos'
 issues_url 'https://github.com/chef-cookbooks/yum-centos/issues'
-chef_version '>= 12.1'
+chef_version '>= 12.1' if respond_to?(:chef_version)
