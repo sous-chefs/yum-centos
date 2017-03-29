@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## 2.2.0 (2017-03-28)
+
+- Remove releasever use to eliminate requirement of centos-release package.
+- Add vault recipe to support running older OS versions without mixing installation of packages.
+
 ## 2.1.0 (2016-12-22)
 
 - Allow the use of any valid property via attributes
