@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'yum-centos::vault' do
   let(:chef_run) do
-    ChefSpec::ServerRunner.converge(described_recipe)
+    ChefSpec::SoloRunner.converge(described_recipe)
   end
 
   it 'converges successfully' do
