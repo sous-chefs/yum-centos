@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## 2.3.0 (2017-06-15)
+
+- Adjust repository defaults for XenServer
+- Updated Chefspecs to avoid deprecation warnings
+
 ## 2.2.0 (2017-03-28)
 
 - Remove releasever use to eliminate requirement of centos-release package.
