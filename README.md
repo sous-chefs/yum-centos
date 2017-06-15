@@ -9,6 +9,7 @@ The yum-centos cookbook takes over management of the default repositoryids that 
 ### Platforms
 
 - CentOS
+- XenServer
 
 ### Chef
 
@@ -20,7 +21,7 @@ The yum-centos cookbook takes over management of the default repositoryids that 
 
 ## Attributes
 
-The following attributes are set by default
+The following attributes are set by default. These values differ slightly on XenServer.
 
 ```ruby
 default['yum']['base']['repositoryid'] = 'base'
