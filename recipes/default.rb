@@ -44,7 +44,6 @@ node['yum-centos']['repos'].each do |repo|
   yum_repository repo do
     node['yum'][repo].each do |config, value|
       case config
-      when 'managed'
       when 'baseurl'
         send(config.to_sym, lazy { value })
       else
