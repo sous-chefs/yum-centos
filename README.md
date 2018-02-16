@@ -13,11 +13,11 @@ The yum-centos cookbook takes over management of the default repositoryids that 
 
 ### Chef
 
-- Chef 12.1+
+- Chef 12.14+
 
 ### Cookbooks
 
-- compat_resource
+- none
 
 ## Attributes
 
@@ -85,12 +85,9 @@ default['yum']['fasttrack']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Cen
 
 ## Recipes
 
-- `yum-centos::default`
-Generates `yum_repository` configs for latest CentOS release. By default the
-`base`, `extras`, `updates` repos are enabled.
+- `yum-centos::default` Generates `yum_repository` configs for latest CentOS release. By default the `base`, `extras`, `updates` repos are enabled.
 
-_NOTE: If you are running an older CentOS release, i.e. 6.7 when 6.8 is the
-latest 6.x release, you may want to consider the `yum-centos::vault` recipe._
+_NOTE: If you are running an older CentOS release, i.e. 6.7 when 6.8 is the latest 6.x release, you may want to consider the `yum-centos::vault` recipe._
 
 ```ruby
   yum_repository 'base' do
@@ -102,9 +99,7 @@ latest 6.x release, you may want to consider the `yum-centos::vault` recipe._
   end
 ```
 
-- `yum-centos::vault`
-Generate yum configuration for non-current versions of CentOS. Instead of using
-`mirrorlist`, `baseurl` is set to `http://vault.centos.org/...`.
+- `yum-centos::vault` Generate yum configuration for non-current versions of CentOS. Instead of using `mirrorlist`, `baseurl` is set to `http://vault.centos.org/...`.
 
 ## Usage Example
 
