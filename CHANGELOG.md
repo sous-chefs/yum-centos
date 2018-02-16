@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## 3.0.0 (2018-02-16)
+
+- Require Chef 12.14+ and remove compat_resource dep
+
 ## 2.3.0 (2017-06-15)
 
 - Adjust repository defaults for XenServer
