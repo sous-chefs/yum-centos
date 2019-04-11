@@ -11,3 +11,6 @@ default['yum-centos']['repos'] = %W(
   fasttrack
   #{contrib}
 )
+
+# NOTE: if set to false, repositories starting with CentOS-SCLo-* won't be deleted
+default['yum-centos']['keep_scl_repositories'] = true
