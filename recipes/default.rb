@@ -33,11 +33,11 @@ ruby_block 'xenserver $releasever' do
   end
 end
 
-if node['yum-centos']['keep_scl_repositories']
-  repositories_to_delete = ::Dir['/etc/yum.repos.d/CentOS-*'].reject { |repo| repo.include?('CentOS-SCLo-') }
-else
-  repositories_to_delete = ::Dir['/etc/yum.repos.d/CentOS-*']
-end
+repositories_to_delete = if node['yum-centos']['keep_scl_repositories']
+                           ::Dir['/etc/yum.repos.d/CentOS-*'].reject { |repo| repo.include?('CentOS-SCLo-') }
+                         else
+                           ::Dir['/etc/yum.repos.d/CentOS-*']
+                         end
 
 repositories_to_delete.each do |f|
   file f do
