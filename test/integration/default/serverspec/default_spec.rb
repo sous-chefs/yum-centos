@@ -5,6 +5,8 @@ set :backend, :exec
 puts "os: #{os}"
 
 describe 'yum-centos::default' do
+  command('yum install -y centos-release-scl-rh centos-release-scl')
+
   context 'deleting default yum channel repositories' do
     describe file '/etc/yum.repos.d/CentOS-Base.repo' do
       it { should_not exist }
@@ -26,6 +28,14 @@ describe 'yum-centos::default' do
     end
     describe file '/etc/yum.repos.d/CentOS-CR.repo' do
       it { should_not exist }
+    end
+  end
+
+  content 'keeping SCL repositories' do
+    ['CentOS-SCLo-scl.repo', 'CentOS-SCLo-scl-rh.repo'].each do |scl_repo|
+      describe file "/etc/yum.repos.d/#{scl_repo}" do
+        it { should exist }
+      end
     end
   end
 
