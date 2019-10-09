@@ -21,8 +21,10 @@ env:
   matrix:
     - INSTANCE=default-centos-6
     - INSTANCE=default-centos-7
+    - INSTANCE=default-centos-8
     - INSTANCE=all-centos-6
     - INSTANCE=all-centos-7
+    - INSTANCE=all-centos-8
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )

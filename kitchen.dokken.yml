@@ -8,15 +8,14 @@ transport:
 
 provisioner:
   name: dokken
+  client_rb:
+    chef_license: accept
   deprecations_as_errors: true
 
 verifier:
   name: inspec
 
 platforms:
-- name: centos-5
-  driver:
-    image: centos:5
 
 - name: centos-6
   driver:
@@ -25,6 +24,10 @@ platforms:
 - name: centos-7
   driver:
     image: centos:7
+
+- name: centos-8
+  driver:
+    image: centos:8
 
 suites:
   - name: default
@@ -46,5 +49,11 @@ suites:
           managed: true
           enabled: true
         cr:
+          managed: true
+          enabled: true
+        powertools:
+          managed: true
+          enabled: true
+        debuginfo:
           managed: true
           enabled: true
