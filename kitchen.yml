@@ -4,6 +4,8 @@ driver:
 provisioner:
   name: chef_zero
   deprecations_as_errors: true
+  client_rb:
+    chef_license: accept
 
 verifier:
   name: inspec
@@ -11,6 +13,7 @@ verifier:
 platforms:
   - name: centos-6
   - name: centos-7
+  - name: centos-8
 
 suites:
   - name: default
@@ -32,5 +35,11 @@ suites:
           managed: true
           enabled: true
         cr:
+          managed: true
+          enabled: true
+        powertools:
+          managed: true
+          enabled: true
+        debuginfo:
           managed: true
           enabled: true

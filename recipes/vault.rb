@@ -18,8 +18,21 @@
 
 release = node['platform_version']
 
-%w(base contrib cr extras fasttrack centosplus updates).each do |id|
-  dir = (id == 'base' ? 'os' : id)
+node['yum-centos']['repos'].each do |id|
+  next unless node['yum'][id]['managed']
+  dir =
+    case id
+    when 'base'
+      value_for_platform(%w(centos redhat xenserver) =>
+        {
+          '>= 8.0' => 'BaseOS',
+          '< 8.0' => 'os',
+        })
+    when 'appstream'
+      'AppStream'
+    else
+      id
+    end
 
   node.default['yum'][id]['description'] = "CentOS-#{release} - #{id.capitalize}"
   node.default['yum'][id]['mirrorlist'] = nil
