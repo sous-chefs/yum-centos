@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## 3.2.0 (2019-10-14)
+
+- Add support for CentOS 8 - [@ramereth](https://github.com/ramereth)
+
 ## 3.1.0 (2019-04-11)
 
 - Add new keep_scl_repositories flag to prevent deleting repos installed through centos-release-scl-rh and centos-release-scl - [@scalp42](https://github.com/scalp42)
