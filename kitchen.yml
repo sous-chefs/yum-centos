@@ -4,8 +4,7 @@ driver:
 provisioner:
   name: chef_zero
   deprecations_as_errors: true
-  client_rb:
-    chef_license: accept
+  chef_license: accept-no-persist
 
 verifier:
   name: inspec

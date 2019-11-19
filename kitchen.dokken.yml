@@ -1,16 +1,15 @@
 driver:
   name: dokken
   privileged: true # because Docker and SystemD/Upstart
-  chef_version: current
+  chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
 
 transport:
   name: dokken
 
 provisioner:
   name: dokken
-  client_rb:
-    chef_license: accept
   deprecations_as_errors: true
+  chef_license: accept-no-persist
 
 verifier:
   name: inspec
@@ -19,41 +18,15 @@ platforms:
 
 - name: centos-6
   driver:
-    image: centos:6
+    image: dokken/centos-6
+    pid_one_command: /sbin/init
 
 - name: centos-7
   driver:
-    image: centos:7
+    image: dokken/centos-7
+    pid_one_command: /usr/lib/systemd/systemd
 
 - name: centos-8
   driver:
-    image: centos:8
-
-suites:
-  - name: default
-    run_list:
-      - recipe[yum-centos::default]
-
-  - name: all
-    run_list:
-      - recipe[yum-centos::default]
-    attributes:
-      yum:
-        contrib:
-          managed: true
-          enabled: true
-        centosplus:
-          managed: true
-          enabled: true
-        fasttrack:
-          managed: true
-          enabled: true
-        cr:
-          managed: true
-          enabled: true
-        powertools:
-          managed: true
-          enabled: true
-        debuginfo:
-          managed: true
-          enabled: true
+    image: dokken/centos-8
+    pid_one_command: /usr/lib/systemd/systemd
