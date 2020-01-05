@@ -10,4 +10,4 @@ supports 'xenserver'
 
 source_url 'https://github.com/chef-cookbooks/yum-centos'
 issues_url 'https://github.com/chef-cookbooks/yum-centos/issues'
-chef_version '>= 12.14'
+chef_version '>= 12.15'
