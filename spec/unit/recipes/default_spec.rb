@@ -13,28 +13,28 @@ describe 'yum-centos::default' do
       when 6, 7
         it do
           expect(chef_run).to create_yum_repository('base')
-            .with(mirrorlist: "http://mirrorlist.centos.org/?release=#{v}&arch=$basearch&repo=os")
+            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os')
         end
         it do
           expect(chef_run).to create_yum_repository('updates')
-            .with(mirrorlist: "http://mirrorlist.centos.org/?release=#{v}&arch=$basearch&repo=updates")
+            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates')
         end
         it do
           expect(chef_run).to create_yum_repository('extras')
-            .with(mirrorlist: "http://mirrorlist.centos.org/?release=#{v}&arch=$basearch&repo=extras&infra=$infra")
+            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras')
         end
       when 8
         it do
           expect(chef_run).to create_yum_repository('base')
-            .with(mirrorlist: "http://mirrorlist.centos.org/?release=#{v}&arch=$basearch&repo=BaseOS&infra=$infra")
+            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=BaseOS')
         end
         it do
           expect(chef_run).to create_yum_repository('appstream')
-            .with(mirrorlist: "http://mirrorlist.centos.org/?release=#{v}&arch=$basearch&repo=AppStream&infra=$infra")
+            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=AppStream')
         end
         it do
           expect(chef_run).to create_yum_repository('extras')
-            .with(mirrorlist: "http://mirrorlist.centos.org/?release=#{v}&arch=$basearch&repo=extras&infra=$infra")
+            .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras')
         end
       end
     end

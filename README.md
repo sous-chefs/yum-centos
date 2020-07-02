@@ -2,7 +2,54 @@
 
 [![Cookbook Version](https://img.shields.io/cookbook/v/yum-centos.svg)](https://supermarket.chef.io/cookbooks/yum-centos)
 
-The yum-centos cookbook takes over management of the default repositoryids that ship with CentOS systems. It allows attribute manipulation of `base`, `updates`, `extras`, `centosplus`, `contrib`, and `fasttrack`.
+The yum-centos cookbook takes over management of the default and optional repositoryids that ship with CentOS systems.
+
+Below is a table showing which repositoryids we manage that are shipped by default with CentOS via the centos-release
+package:
+
+| Repo ID          | CentOS 6         | CentOS 7         | CentOS 8         |
+| ---------------- | :--------------: | :--------------: | :--------------: |
+| appstream        |       :x:        |       :x:        |:heavy_check_mark:|
+| base             |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+| centos-kernel    |       :x:        |:heavy_check_mark:|       :x:        |
+| centosplus       |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+| contrib          |:heavy_check_mark:|       :x:        |       :x:        |
+| cr               |       :x:        |:heavy_check_mark:|:heavy_check_mark:|
+| debuginfo        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+| extras           |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+| fasttrack        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+| highavailability |       :x:        |       :x:        |:heavy_check_mark:|
+| powertools       |       :x:        |       :x:        |:heavy_check_mark:|
+| updates          |:heavy_check_mark:|:heavy_check_mark:|       :x:        |
+
+Additionally, this cookbook can manage the following CentOS repositories that can *optionally* be installed.  The table
+below displays each repositories we support, which platform version they are supported on and what upstream release
+package it effectively replaces. Some of these repositories may depend on another related repository. This cookbook
+*does not* automatically account for such dependencies and this is up to the user to configure the appropriate
+repositories.
+
+While upstream may provide additional versions for the repositories below, we only maintain the current release. Users
+are welcome to override those attributes as they see fit for their environment.
+
+| Repo ID                 | CentOS 6         | CentOS 7         | CentOS 8         | Upstream release package     |
+| ----------------------- | :--------------: | :--------------: | :--------------: | ---------------------------- |
+| centos-ansible          |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-ansible-29    |
+| centos-azure            |:heavy_check_mark:|:heavy_check_mark:|       :x:        | centos-release-azure         |
+| centos-ceph             |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-ceph-octopus (C8) <br> centos-release-ceph-nautilus (C7) |
+| centos-dotnet           |       :x:        |:heavy_check_mark:|       :x:        | centos-release-dotnet        |
+| centos-fdio             |       :x:        |:heavy_check_mark:|       :x:        | centos-release-fdio          |
+| centos-gluster          |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-gluster7      |
+| centos-nfs-ganesha      |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-nfs-ganesha30 |
+| centos-openshift-origin |       :x:        |:heavy_check_mark:|       :x:        | centos-release-openshift-origin311 |
+| centos-openstack        |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-openstack-ussuri (C8) <br> centos-release-openstack-train (C7) |
+| centos-opstools         |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-opstools      |
+| centos-ovirt            |       :x:        |:heavy_check_mark:|       :x:        | centos-release-ovirt43       |
+| centos-qemu-ev          |       :x:        |:heavy_check_mark:|       :x:        | centos-release-qemu-ev       |
+| centos-qpid-proton      |       :x:        |       :x:        |:heavy_check_mark:| centos-release-qpid-proton   |
+| centos-rabbitmq         |       :x:        |       :x:        |:heavy_check_mark:| centos-release-rabbitmq-38   |
+| centos-sclo-rh          |:heavy_check_mark:|:heavy_check_mark:|       :x:        | centos-release-scl-rh        |
+| centos-sclo             |:heavy_check_mark:|:heavy_check_mark:|       :x:        | centos-release-scl           |
+| centos-virt-xen         |:heavy_check_mark:|:heavy_check_mark:|       :x:        | centos-release-xen-412       |
 
 ## Requirements
 
@@ -21,81 +68,91 @@ The yum-centos cookbook takes over management of the default repositoryids that 
 
 ## Attributes
 
-The following attributes are set by default. These values differ slightly on XenServer.
+See individual repository attribute files for defaults.
+
+If using the vault recipe, you can set ``node['yum-centos']['vault_release']`` or use the defaults which are shown below:
 
 ```ruby
-default['yum']['base']['repositoryid'] = 'base'
-default['yum']['base']['mirrorlist'] = "http://mirrorlist.centos.org/?release=#{node['platform_version'].to_i}&arch=$basearch&repo=os"
-default['yum']['base']['description'] = "CentOS-#{node['platform_version'].to_i} - Base"
-default['yum']['base']['enabled'] = true
-default['yum']['base']['managed'] = true
-default['yum']['base']['gpgcheck'] = true
-default['yum']['base']['gpgkey'] = "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-#{node['platform_version'].to_i}"
+# Vault only provides binary packages for the previous release
+default['yum-centos']['vault_release'] =
+  value_for_platform(%w(centos redhat xenserver) =>
+  {
+      '>= 8.0' => '8.0.1905',
+      '~> 7.0' => '7.7.1908',
+      '< 7.0' => '6.9',
+  })
 ```
 
-```ruby
-default['yum']['contrib']['repositoryid'] = 'contrib'
-default['yum']['contrib']['description'] = "CentOS-#{node['platform_version'].to_i} - Contrib"
-default['yum']['contrib']['mirrorlist'] = "http://mirrorlist.centos.org/?release=#{node['platform_version'].to_i}&arch=$basearch&repo=contrib"
-default['yum']['contrib']['enabled'] = false
-default['yum']['contrib']['managed'] = false
-default['yum']['contrib']['gpgcheck'] = true
-default['yum']['contrib']['gpgkey'] = "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-#{node['platform_version'].to_i}"
-```
+Some repositories provide a version attribute to set which version of the repository to use. Changing these will also
+update the version used in ``mirrorlist`` and ``description``.
 
 ```ruby
-default['yum']['extras']['repositoryid'] = 'extras'
-default['yum']['extras']['description'] = 'CentOS-#{node['platform_version'].to_i} - Extras'
-default['yum']['extras']['mirrorlist'] = "http://mirrorlist.centos.org/?release=#{node['platform_version'].to_i}&arch=$basearch&repo=extras"
-default['yum']['extras']['enabled'] = true
-default['yum']['extras']['managed'] = true
-default['yum']['extras']['gpgcheck'] = true
-default['yum']['extras']['gpgkey'] = "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-#{node['platform_version'].to_i}"
+default['yum-centos']['ansible_version'] = '29'
+default['yum-centos']['ceph_version'] =
+  value_for_platform(%w(centos redhat xenserver) =>
+  {
+      '>= 8.0' => 'octopus',
+      '~> 7.0' => 'nautilus',
+      '< 7.0' => '',
+  })
+default['yum-centos']['gluster_version'] = '7'
+default['yum-centos']['nfs_ganesha_version'] =
+  value_for_platform(%w(centos redhat xenserver) =>
+  {
+      '>= 8.0' => '3',
+      '~> 7.0' => '30',
+  })
+default['yum-centos']['openshift_version'] = '311'
+default['yum-centos']['openstack_version'] =
+  value_for_platform(%w(centos redhat xenserver) =>
+  {
+      '>= 8.0' => 'ussuri',
+      '~> 7.0' => 'train',
+      '< 7.0' => '',
+  })
+default['yum-centos']['opstools_version'] =
+  value_for_platform(%w(centos redhat xenserver) =>
+  {
+      '>= 8.0' => '-collectd-5',
+      '< 8.0' => '',
+  })
+default['yum-centos']['ovirt_version'] = '4.3'
+default['yum-centos']['rabbitmq_version'] = '38'
+default['yum-centos']['virt_xen_version'] =
+  value_for_platform(%w(centos redhat xenserver) =>
+  {
+      '~> 7.0' => '412',
+      '< 7.0' => '410',
+  })
 ```
 
-```ruby
-default['yum']['centosplus']['repositoryid'] = 'centosplus'
-default['yum']['centosplus']['description'] = 'CentOS-#{node['platform_version'].to_i} - Centosplus'
-default['yum']['centosplus']['mirrorlist'] = 'http://mirrorlist.centos.org/?release=#{node['platform_version'].to_i}&arch=$basearch&repo=centosplus'
-default['yum']['centosplus']['enabled'] = false
-default['yum']['centosplus']['managed'] = false
-default['yum']['centosplus']['gpgcheck'] = true
-default['yum']['centosplus']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-#{node['platform_version'].to_i}'
-```
+_NOTE: If you are migrating from using `node['yum-centos']['keep_scl_repositories']`, you will need to do the following
+  to enable the repositories using this cookbook:_
 
 ```ruby
-default['yum']['updates']['repositoryid'] = 'updates'
-default['yum']['updates']['description'] = 'CentOS-#{node['platform_version'].to_i} - Updates'
-default['yum']['updates']['mirrorlist'] = 'http://mirrorlist.centos.org/?release=#{node['platform_version'].to_i}&arch=$basearch&repo=updates'
-default['yum']['updates']['enabled'] = true
-default['yum']['updates']['managed'] = true
-default['yum']['updates']['gpgcheck'] = true
-default['yum']['updates']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-#{node['platform_version'].to_i}'
-```
+node.default['yum']['centos-sclo']['enabled'] = true
+node.default['yum']['centos-sclo']['managed'] = true
+node.default['yum']['centos-sclo-rh']['enabled'] = true
+node.default['yum']['centos-sclo-rh']['managed'] = true
 
-```ruby
-default['yum']['fasttrack']['repositoryid'] = 'fasttrack'
-default['yum']['fasttrack']['description'] = 'CentOS-#{node['platform_version'].to_i} - fasttrack'
-default['yum']['fasttrack']['mirrorlist'] = 'http://mirrorlist.centos.org/?release=#{node['platform_version'].to_i}&arch=$basearch&repo=fasttrack&infra=$infra'
-default['yum']['fasttrack']['enabled'] = false
-default['yum']['fasttrack']['managed'] = false
-default['yum']['fasttrack']['gpgcheck'] = true
-default['yum']['fasttrack']['gpgkey'] = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-#{node['platform_version'].to_i}'
+include_recipe 'yum-centos'
 ```
 
 ## Recipes
 
-- `yum-centos::default` Generates `yum_repository` configs for latest CentOS release. By default the `base`, `extras`, `updates` repos are enabled.
+- `yum-centos::default` Generates `yum_repository` configs for latest CentOS release. By default the `base`, `extras`,
+  and `updates` repos are enabled on CentOS 7. For CentOS 8, `base`, `extras` and `appstream` repos are enabled by
+  default.
 
 _NOTE: If you are running an older CentOS release, i.e. 6.7 when 6.8 is the latest 6.x release, you may want to consider the `yum-centos::vault` recipe._
 
 ```ruby
   yum_repository 'base' do
-    mirrorlist 'http://mirrorlist.centos.org/?release=#{node['platform_version'].to_i}&arch=$basearch&repo=os'
-    description 'CentOS-#{node['platform_version'].to_i} - Base'
+    mirrorlist 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os'
+    description 'CentOS-$releasever - Base'
     enabled true
     gpgcheck true
-    gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-#{node['platform_version'].to_i}'
+    gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-$releasever'
   end
 ```
 

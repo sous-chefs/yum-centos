@@ -2,6 +2,26 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## Unreleased
+
+### Added
+- Add various SIG repos
+- Suite and InSpec tests for vault recipe
+
+### Changed
+- Changed to using $releasever instead of using ``node['platform_version'].to_i``
+- Remove appended ``&infra=$infra`` to mirrorlist URLs as they are not required and make testing easier
+- Update InSpec tests to use yum.repo where it makes sense
+- Re-enable debuginfo and cr repos for CentOS 8 now that they are available
+
+### Deprecated
+- Breaking Change: Remove ``node['yum-centos']['keep_scl_repositories']`` attribute since we manage SCL repos directly
+  now
+
+### Fixed
+- Fix vault recipe and add ``node['yum-centos']['vault_release']`` attribute for setting which version to use. By
+  default use previous release.
+
 ## 3.2.0 (2019-10-14)
 
 - Add support for CentOS 8 - [@ramereth](https://github.com/ramereth)

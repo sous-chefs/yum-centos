@@ -33,13 +33,12 @@ ruby_block 'xenserver $releasever' do
   end
 end
 
-repositories_to_delete = if node['yum-centos']['keep_scl_repositories']
-                           ::Dir['/etc/yum.repos.d/CentOS-*'].reject { |repo| repo.include?('CentOS-SCLo-') }
-                         else
-                           ::Dir['/etc/yum.repos.d/CentOS-*']
-                         end
+if node['yum-centos']['keep_scl_repositories']
+  raise "The node['yum-centos']['keep_scl_repositories'] attribute has been deprecated. SCL repos are now fully \n" \
+        'managed by this cookbook. Please look at the README for more information on how to migrate.'
+end
 
-repositories_to_delete.each do |f|
+::Dir['/etc/yum.repos.d/CentOS-*'].each do |f|
   file f do
     action :delete
   end
