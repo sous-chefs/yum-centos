@@ -116,9 +116,6 @@ suites:
         centos-openstack-debuginfo:
           managed: true
           enabled: true
-        centos-openstack-trunk-tested:
-          managed: true
-          enabled: true
         centos-opstools:
           managed: true
           enabled: true

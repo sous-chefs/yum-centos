@@ -33,13 +33,3 @@ default['yum']['centos-openstack-debuginfo']['exclude'] = 'sip,PyQt4'
 default['yum']['centos-openstack-debuginfo']['baseurl'] =
   'http://debuginfo.centos.org/centos/$releasever/cloud/$basearch/'
 default['yum']['centos-openstack-debuginfo']['gpgkey'] = 'https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-Cloud'
-# rdo-trunk-tested
-default['yum']['centos-openstack-trunk-tested']['repositoryid'] = 'centos-openstack-trunk-tested'
-default['yum']['centos-openstack-trunk-tested']['description'] = "OpenStack #{ver.capitalize} Trunk Tested"
-default['yum']['centos-openstack-trunk-tested']['enabled'] = false
-default['yum']['centos-openstack-trunk-tested']['make_cache'] = true
-default['yum']['centos-openstack-trunk-tested']['managed'] = false
-default['yum']['centos-openstack-trunk-tested']['gpgcheck'] = false
-default['yum']['centos-openstack-trunk-tested']['exclude'] = 'sip,PyQt4'
-default['yum']['centos-openstack-trunk-tested']['baseurl'] =
-  "https://trunk.rdoproject.org/centos$releasever-#{ver}/current-passed-ci/"

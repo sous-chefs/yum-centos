@@ -66,7 +66,6 @@ default['yum-centos']['repos'] =
           centos-openstack
           centos-openstack-testing
           centos-openstack-debuginfo
-          centos-openstack-trunk-tested
           centos-opstools
           centos-opstools-testing
           centos-ovirt

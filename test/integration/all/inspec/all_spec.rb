@@ -319,14 +319,6 @@ when 7
     end
   end
 
-  describe yum.repo 'centos-openstack-trunk-tested' do
-    it { should exist }
-    it { should be_enabled }
-    its('baseurl') do
-      should cmp 'https://trunk.rdoproject.org/centos7-train/current-passed-ci/'
-    end
-  end
-
   describe yum.repo 'centos-opstools' do
     it { should exist }
     it { should be_enabled }
