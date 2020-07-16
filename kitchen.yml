@@ -18,7 +18,9 @@ suites:
   - name: default
     run_list:
       - recipe[yum-centos::default]
-
+  - name: vault
+    run_list:
+      - recipe[yum-centos::vault]
   - name: all
     run_list:
       - recipe[yum-centos::default]
@@ -40,5 +42,140 @@ suites:
           managed: true
           enabled: true
         debuginfo:
+          managed: true
+          enabled: true
+        centos-ansible:
+          managed: true
+          enabled: true
+        centos-ansible-testing:
+          managed: true
+          enabled: true
+        centos-ansible-debuginfo:
+          managed: true
+          enabled: true
+        centos-azure:
+          managed: true
+          enabled: true
+        centos-azure-testing:
+          managed: true
+          enabled: true
+        centos-ceph:
+          managed: true
+          enabled: true
+        centos-ceph-testing:
+          managed: true
+          enabled: true
+        centos-dotnet:
+          managed: true
+          enabled: true
+        centos-fdio:
+          managed: true
+          enabled: true
+        centos-fdio-testing:
+          managed: true
+          enabled: true
+        centos-kernel:
+          managed: true
+          enabled: true
+        centos-gluster:
+          managed: true
+          enabled: true
+        centos-gluster-testing:
+          managed: true
+          enabled: true
+        highavailability:
+          managed: true
+          enabled: true
+        centos-nfs-ganesha:
+          managed: true
+          enabled: true
+        centos-nfs-ganesha-testing:
+          managed: true
+          enabled: true
+        centos-nfv-common:
+          managed: true
+          enabled: true
+        centos-nfv-common-testing:
+          managed: true
+          enabled: true
+        centos-openshift-origin:
+          managed: true
+          enabled: true
+        centos-openshift-origin-testing:
+          managed: true
+          enabled: true
+        centos-openshift-origin-debuginfo:
+          managed: true
+          enabled: true
+        centos-openstack:
+          managed: true
+          enabled: true
+        centos-openstack-testing:
+          managed: true
+          enabled: true
+        centos-openstack-debuginfo:
+          managed: true
+          enabled: true
+        centos-opstools:
+          managed: true
+          enabled: true
+        centos-opstools-testing:
+          managed: true
+          enabled: true
+        centos-ovirt:
+          managed: true
+          enabled: true
+        centos-ovirt-testing:
+          managed: true
+          enabled: true
+        centos-ovirt-debuginfo:
+          managed: true
+          enabled: true
+        centos-qemu-ev:
+          managed: true
+          enabled: true
+        centos-qemu-ev-testing:
+          managed: true
+          enabled: true
+        centos-qpid-proton:
+          managed: true
+          enabled: true
+        centos-qpid-proton-testing:
+          managed: true
+          enabled: true
+        centos-qpid-proton-debuginfo:
+          managed: true
+          enabled: true
+        centos-rabbitmq:
+          managed: true
+          enabled: true
+        centos-rabbitmq-testing:
+          managed: true
+          enabled: true
+        centos-rabbitmq-debuginfo:
+          managed: true
+          enabled: true
+        centos-sclo:
+          managed: true
+          enabled: true
+        centos-sclo-testing:
+          managed: true
+          enabled: true
+        centos-sclo-debuginfo:
+          managed: true
+          enabled: true
+        centos-sclo-rh:
+          managed: true
+          enabled: true
+        centos-sclo-rh-testing:
+          managed: true
+          enabled: true
+        centos-sclo-rh-debuginfo:
+          managed: true
+          enabled: true
+        centos-virt-xen:
+          managed: true
+          enabled: true
+        centos-virt-xen-testing:
           managed: true
           enabled: true

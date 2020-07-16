@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-release = node['platform_version']
+release = node['yum-centos']['vault_release']
 
 node['yum-centos']['repos'].each do |id|
   next unless node['yum'][id]['managed']
@@ -30,13 +30,22 @@ node['yum-centos']['repos'].each do |id|
         })
     when 'appstream'
       'AppStream'
-    else
+    when 'powertools'
+      'PowerTools'
+    when 'updates', 'extras', 'centosplus', 'fasttrack'
       id
+    else
+      next
     end
 
   node.default['yum'][id]['description'] = "CentOS-#{release} - #{id.capitalize}"
   node.default['yum'][id]['mirrorlist'] = nil
-  node.default['yum'][id]['baseurl'] = "http://vault.centos.org/#{release}/#{dir}/$basearch/"
+  case node['platform_version'].to_i
+  when 6, 7
+    node.default['yum'][id]['baseurl'] = "http://vault.centos.org/#{release}/#{dir}/$basearch/"
+  when 8
+    node.default['yum'][id]['baseurl'] = "http://vault.centos.org/#{release}/#{dir}/$basearch/os/"
+  end
 end
 
 include_recipe 'yum-centos::default'

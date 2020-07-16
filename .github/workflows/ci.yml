@@ -29,6 +29,7 @@
             - 'centos-8'
           suite:
             - 'default'
+            - 'vault'
             - 'all'
         fail-fast: false
 
