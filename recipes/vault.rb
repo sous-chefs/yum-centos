@@ -25,7 +25,7 @@ node['yum-centos']['vault_repos'].each do |release, _config|
     dir =
       case id
       when 'base'
-        value_for_platform(%w(centos redhat xenserver) =>
+        value_for_platform(%w(centos redhat) =>
           {
             '>= 8.0' => 'BaseOS',
             '< 8.0' => 'os',

@@ -18,6 +18,7 @@ This file is used to list changes made in each version of the yum-centos cookboo
 ### Deprecated
 - Breaking Change: Remove ``node['yum-centos']['keep_scl_repositories']`` attribute since we manage SCL repos directly
   now
+- Breaking Change: Remove support for XenServer
 
 ### Fixed
 - Fix vault recipe and add ``node['yum-centos']['vault_repos']`` attribute for setting which version to use. By

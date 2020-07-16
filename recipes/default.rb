@@ -16,23 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ruby_block 'xenserver $releasever' do
-  only_if { platform?('xenserver') }
-
-  block do
-    cmd = shell_out!('rpm -q --provides xenserver-release | ' \
-                     'sed -n "s/^centos-release = \(.*\)/\1/p"')
-
-    releasever = cmd.stdout.chomp.sub(/\.el.*/, '').tr('^0-9', '.')
-
-    node.default['yum-centos']['repos'].each do |repo|
-      dir = repo == 'base' ? 'os' : repo
-      node.default['yum'][repo]['baseurl'] =
-        "http://mirror.centos.org/centos/#{releasever}/#{dir}/$basearch/"
-    end
-  end
-end
-
 if node['yum-centos']['keep_scl_repositories']
   raise "The node['yum-centos']['keep_scl_repositories'] attribute has been deprecated. SCL repos are now fully \n" \
         'managed by this cookbook. Please look at the README for more information on how to migrate.'
