@@ -7,6 +7,7 @@ This file is used to list changes made in each version of the yum-centos cookboo
 ### Added
 - Add various SIG repos
 - Suite and InSpec tests for vault recipe
+- Add support for multiple release vaults (resolves #28)
 
 ### Changed
 - Changed to using $releasever instead of using ``node['platform_version'].to_i``
@@ -19,7 +20,7 @@ This file is used to list changes made in each version of the yum-centos cookboo
   now
 
 ### Fixed
-- Fix vault recipe and add ``node['yum-centos']['vault_release']`` attribute for setting which version to use. By
+- Fix vault recipe and add ``node['yum-centos']['vault_repos']`` attribute for setting which version to use. By
   default use previous release.
 
 ## 3.2.0 (2019-10-14)

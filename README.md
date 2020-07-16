@@ -70,18 +70,33 @@ are welcome to override those attributes as they see fit for their environment.
 
 See individual repository attribute files for defaults.
 
-If using the vault recipe, you can set ``node['yum-centos']['vault_release']`` or use the defaults which are shown below:
+If using the vault recipe, you can set ``node['yum-centos']['vault_repos']``. See below for an example for CentOS 8:
 
 ```ruby
-# Vault only provides binary packages for the previous release
-default['yum-centos']['vault_release'] =
-  value_for_platform(%w(centos redhat xenserver) =>
-  {
-      '>= 8.0' => '8.0.1905',
-      '~> 7.0' => '7.7.1908',
-      '< 7.0' => '6.9',
-  })
+# Enable 8.0.1905 vault release
+node['yum-centos']['vault_repos']['8.0.1905']['enabled'] = true
+node['yum-centos']['vault_repos']['8.0.1905']['managed'] = true
+node['yum-centos']['vault_repos']['8.0.1905']['make_cache'] = true
+
+include 'yum-centos::vault'
 ```
+
+To enable multiple vault releases, you can do the following:
+```ruby
+node['yum-centos']['vault_repos']['6.8']['enabled'] = true
+node['yum-centos']['vault_repos']['6.8']['managed'] = true
+node['yum-centos']['vault_repos']['6.8']['make_cache'] = true
+node['yum-centos']['vault_repos']['6.9']['enabled'] = true
+node['yum-centos']['vault_repos']['6.9']['managed'] = true
+node['yum-centos']['vault_repos']['6.9']['make_cache'] = true
+
+include 'yum-centos::vault'
+```
+
+The vault repositories only provides binary packages for the previous release which currently defaults to the following:
+- CentOS 6: 6.9
+- CentOS 7: 7.7.1908
+- CentOS 8: 8.0.1905
 
 Some repositories provide a version attribute to set which version of the repository to use. Changing these will also
 update the version used in ``mirrorlist`` and ``description``.

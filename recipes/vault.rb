@@ -16,36 +16,49 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-release = node['yum-centos']['vault_release']
+include_recipe 'yum-centos::default'
 
-node['yum-centos']['repos'].each do |id|
-  next unless node['yum'][id]['managed']
-  dir =
-    case id
-    when 'base'
-      value_for_platform(%w(centos redhat xenserver) =>
-        {
-          '>= 8.0' => 'BaseOS',
-          '< 8.0' => 'os',
-        })
-    when 'appstream'
-      'AppStream'
-    when 'powertools'
-      'PowerTools'
-    when 'updates', 'extras', 'centosplus', 'fasttrack'
-      id
-    else
-      next
+node['yum-centos']['vault_repos'].each do |release, _config|
+  node['yum-centos']['repos'].each do |id|
+    next unless node['yum'][id]['managed']
+    next unless node['yum-centos']['vault_repos'][release]['managed']
+    dir =
+      case id
+      when 'base'
+        value_for_platform(%w(centos redhat xenserver) =>
+          {
+            '>= 8.0' => 'BaseOS',
+            '< 8.0' => 'os',
+          })
+      when 'appstream'
+        'AppStream'
+      when 'powertools'
+        'PowerTools'
+      when 'updates', 'extras', 'centosplus', 'fasttrack'
+        id
+      else
+        next
+      end
+
+    yum_repository "centos-vault-#{release}-#{id}" do
+      description "CentOS-#{release} Vault - #{id.capitalize}"
+      case node['platform_version'].to_i
+      when 6, 7
+        baseurl "http://vault.centos.org/#{release}/#{dir}/$basearch/"
+        gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-$releasever'
+      when 8
+        baseurl "http://vault.centos.org/#{release}/#{dir}/$basearch/os/"
+        gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial'
+      end
+      node['yum-centos']['vault_repos'][release].each do |config, value|
+        case config
+        when 'managed' # rubocop: disable Lint/EmptyWhen
+        when 'baseurl'
+          send(config.to_sym, lazy { value })
+        else
+          send(config.to_sym, value) unless value.nil?
+        end
+      end
     end
-
-  node.default['yum'][id]['description'] = "CentOS-#{release} - #{id.capitalize}"
-  node.default['yum'][id]['mirrorlist'] = nil
-  case node['platform_version'].to_i
-  when 6, 7
-    node.default['yum'][id]['baseurl'] = "http://vault.centos.org/#{release}/#{dir}/$basearch/"
-  when 8
-    node.default['yum'][id]['baseurl'] = "http://vault.centos.org/#{release}/#{dir}/$basearch/os/"
   end
 end
-
-include_recipe 'yum-centos::default'

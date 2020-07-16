@@ -106,13 +106,19 @@ default['yum-centos']['repos'] =
           centos-virt-xen-testing
         ),
     })
+default_vault_settings = {
+  'enabled' => true,
+  'managed' => true,
+  'make_cache' => true,
+}
+
 # Vault only provides binary packages for the previous release
-default['yum-centos']['vault_release'] =
+default['yum-centos']['vault_repos'] =
   value_for_platform(%w(centos redhat xenserver) =>
   {
-      '>= 8.0' => '8.0.1905',
-      '~> 7.0' => '7.7.1908',
-      '< 7.0' => '6.9',
+      '>= 8.0' => { '8.0.1905' => default_vault_settings },
+      '~> 7.0' => { '7.7.1908' => default_vault_settings },
+      '< 7.0' => { '6.9' => default_vault_settings },
   })
 
 # SIG repo versions

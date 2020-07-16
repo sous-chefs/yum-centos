@@ -1,45 +1,50 @@
 require 'spec_helper'
 
 describe 'yum-centos::vault' do
-  %w(6 7 8).each do |v|
-    context "centos-#{v}" do
-      platform 'centos', v
-      it do
-        expect(chef_run).to create_yum_repository('extras')
-          .with(
-            mirrorlist: nil,
-            baseurl: %r{http://vault.centos.org/#{v}.*/extras/\$basearch/}
-          )
-      end
+  %w(
+    6.9
+    7.7.1908
+    8.0.1905
+  ).each do |v|
+    context "centos-#{v.to_i}" do
+      platform 'centos', v.split('.')[0]
       case v.to_i
       when 6, 7
         it do
-          expect(chef_run).to create_yum_repository('base')
+          expect(chef_run).to create_yum_repository("centos-vault-#{v}-base")
             .with(
-              mirrorlist: nil,
-              baseurl: %r{http://vault.centos.org/#{v}.*/os/\$basearch/}
+              baseurl: "http://vault.centos.org/#{v}/os/$basearch/"
             )
         end
         it do
-          expect(chef_run).to create_yum_repository('updates')
+          expect(chef_run).to create_yum_repository("centos-vault-#{v}-updates")
             .with(
-              mirrorlist: nil,
-              baseurl: %r{http://vault.centos.org/#{v}.*/updates/\$basearch/}
+              baseurl: "http://vault.centos.org/#{v}/updates/$basearch/"
+            )
+        end
+        it do
+          expect(chef_run).to create_yum_repository("centos-vault-#{v}-extras")
+            .with(
+              baseurl: "http://vault.centos.org/#{v}/extras/$basearch/"
             )
         end
       when 8
         it do
-          expect(chef_run).to create_yum_repository('base')
+          expect(chef_run).to create_yum_repository("centos-vault-#{v}-base")
             .with(
-              mirrorlist: nil,
-              baseurl: %r{http://vault.centos.org/#{v}.*/BaseOS/\$basearch/}
+              baseurl: "http://vault.centos.org/#{v}/BaseOS/$basearch/os/"
             )
         end
         it do
-          expect(chef_run).to create_yum_repository('appstream')
+          expect(chef_run).to create_yum_repository("centos-vault-#{v}-appstream")
             .with(
-              mirrorlist: nil,
-              baseurl: %r{http://vault.centos.org/#{v}.*/AppStream/\$basearch/}
+              baseurl: "http://vault.centos.org/#{v}/AppStream/$basearch/os/"
+            )
+        end
+        it do
+          expect(chef_run).to create_yum_repository("centos-vault-#{v}-extras")
+            .with(
+              baseurl: "http://vault.centos.org/#{v}/extras/$basearch/os/"
             )
         end
       end
