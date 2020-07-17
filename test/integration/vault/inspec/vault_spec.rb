@@ -29,10 +29,9 @@ vault_release =
     '6.9'
   end
 
-describe yum.repo 'base' do
+describe yum.repo "centos-vault-#{vault_release}-base" do
   it { should exist }
   it { should be_enabled }
-  its('mirrors') { should cmp nil }
   if os_release == 8
     its('baseurl') { should cmp "http://vault.centos.org/#{vault_release}/BaseOS/x86_64/os/" }
   else
@@ -40,10 +39,9 @@ describe yum.repo 'base' do
   end
 end
 
-describe yum.repo 'extras' do
+describe yum.repo "centos-vault-#{vault_release}-extras" do
   it { should exist }
   it { should be_enabled }
-  its('mirrors') { should cmp nil }
   if os_release == 8
     its('baseurl') { should cmp "http://vault.centos.org/#{vault_release}/extras/x86_64/os/" }
   else
@@ -53,23 +51,21 @@ end
 
 case os_release
 when 6, 7
-  describe yum.repo 'updates' do
+  describe yum.repo "centos-vault-#{vault_release}-updates" do
     it { should exist }
     it { should be_enabled }
-    its('mirrors') { should cmp nil }
     its('baseurl') { should cmp "http://vault.centos.org/#{vault_release}/updates/x86_64/" }
   end
 when 8
-  describe yum.repo 'appstream' do
+  describe yum.repo "centos-vault-#{vault_release}-appstream" do
     it { should exist }
     it { should be_enabled }
-    its('mirrors') { should cmp nil }
     its('baseurl') { should cmp "http://vault.centos.org/#{vault_release}/AppStream/x86_64/os/" }
   end
 end
 
 %w(centosplus fasttrack contrib cr debuginfo).each do |repo|
-  describe yum.repo repo do
+  describe yum.repo "centos-vault-#{vault_release}-#{repo}" do
     it { should_not exist }
     it { should_not be_enabled }
   end
