@@ -6,7 +6,6 @@ description 'Installs and configures the Centos Yum repositories'
 version '3.2.0'
 
 supports 'centos'
-supports 'xenserver'
 
 source_url 'https://github.com/chef-cookbooks/yum-centos'
 issues_url 'https://github.com/chef-cookbooks/yum-centos/issues'

@@ -56,7 +56,6 @@ are welcome to override those attributes as they see fit for their environment.
 ### Platforms
 
 - CentOS
-- XenServer
 
 ### Chef
 
@@ -104,7 +103,7 @@ update the version used in ``mirrorlist`` and ``description``.
 ```ruby
 default['yum-centos']['ansible_version'] = '29'
 default['yum-centos']['ceph_version'] =
-  value_for_platform(%w(centos redhat xenserver) =>
+  value_for_platform(%w(centos redhat) =>
   {
       '>= 8.0' => 'octopus',
       '~> 7.0' => 'nautilus',
@@ -112,21 +111,21 @@ default['yum-centos']['ceph_version'] =
   })
 default['yum-centos']['gluster_version'] = '7'
 default['yum-centos']['nfs_ganesha_version'] =
-  value_for_platform(%w(centos redhat xenserver) =>
+  value_for_platform(%w(centos redhat) =>
   {
       '>= 8.0' => '3',
       '~> 7.0' => '30',
   })
 default['yum-centos']['openshift_version'] = '311'
 default['yum-centos']['openstack_version'] =
-  value_for_platform(%w(centos redhat xenserver) =>
+  value_for_platform(%w(centos redhat) =>
   {
       '>= 8.0' => 'ussuri',
       '~> 7.0' => 'train',
       '< 7.0' => '',
   })
 default['yum-centos']['opstools_version'] =
-  value_for_platform(%w(centos redhat xenserver) =>
+  value_for_platform(%w(centos redhat) =>
   {
       '>= 8.0' => '-collectd-5',
       '< 8.0' => '',
@@ -134,7 +133,7 @@ default['yum-centos']['opstools_version'] =
 default['yum-centos']['ovirt_version'] = '4.3'
 default['yum-centos']['rabbitmq_version'] = '38'
 default['yum-centos']['virt_xen_version'] =
-  value_for_platform(%w(centos redhat xenserver) =>
+  value_for_platform(%w(centos redhat) =>
   {
       '~> 7.0' => '412',
       '< 7.0' => '410',
