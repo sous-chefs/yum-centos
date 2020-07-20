@@ -1,6 +1,6 @@
 # centos-release-openstack-train  : CentOS 7
 # centos-release-openstack-ussuri : CentOS 8
-ver = node['yum-centos']['openstack_version']
+ver = node['yum-centos']['openstack_version'].to_s
 
 default['yum']['centos-openstack']['repositoryid'] = 'centos-openstack'
 default['yum']['centos-openstack']['description'] =

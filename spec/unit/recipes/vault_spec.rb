@@ -50,4 +50,11 @@ describe 'yum-centos::vault' do
       end
     end
   end
+  # Make sure we don't break non-RHEL systems which simply include this cookbook
+  context 'ubuntu' do
+    platform 'ubuntu'
+    it 'converges successfully' do
+      expect { chef_run }.to_not raise_error
+    end
+  end
 end

@@ -1,6 +1,6 @@
 # centos-release-ceph-nautilus : CentOS 7
 # centos-release-ceph-octopus  : CentOS 8
-ver = node['yum-centos']['ceph_version']
+ver = node['yum-centos']['ceph_version'].to_s
 
 default['yum']['centos-ceph']['repositoryid'] = 'centos-ceph'
 default['yum']['centos-ceph']['description'] = "CentOS-$releasever - Ceph #{ver.capitalize}"

@@ -15,6 +15,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+return unless platform_family?('rhel')
 
 if node['yum-centos']['keep_scl_repositories']
   raise "The node['yum-centos']['keep_scl_repositories'] attribute has been deprecated. SCL repos are now fully \n" \
