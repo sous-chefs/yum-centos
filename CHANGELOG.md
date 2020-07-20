@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
-## Unreleased
+## 4.0.1 (2020-07-20)
 
 ### Added
 - ChefSpec test for non-RHEL systems to ensure compile-time issues are caught
