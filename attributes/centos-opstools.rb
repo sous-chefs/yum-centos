@@ -1,6 +1,6 @@
 # centos-release-opstools : CentOS 7
 # centos-release-opstools : CentOS 8
-ver = node['yum-centos']['opstools_version']
+ver = node['yum-centos']['opstools_version'].to_s
 
 default['yum']['centos-opstools']['repositoryid'] = 'centos-opstools'
 default['yum']['centos-opstools']['description'] = 'CentOS-$releasever - OpsTools'
