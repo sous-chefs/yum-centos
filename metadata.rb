@@ -3,7 +3,7 @@ maintainer 'Chef Software, Inc.'
 maintainer_email 'cookbooks@chef.io'
 license 'Apache-2.0'
 description 'Installs and configures the Centos Yum repositories'
-version '3.2.0'
+version '4.0.0'
 
 supports 'centos'
 

@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
-## Unreleased
+## 4.0.0 (2020-07-17)
 
 ### Added
 - Add various SIG repos
