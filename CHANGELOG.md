@@ -2,6 +2,14 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## Unreleased
+
+### Fixed
+- Fix Chef 12 compatibility (resolves #42)
+
+### Added
+- Kitchen suite for testing against Chef 12
+
 ## 4.0.1 (2020-07-20)
 
 ### Added

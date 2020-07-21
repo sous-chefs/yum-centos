@@ -18,4 +18,4 @@ default['yum']['centos-opstools-testing']['make_cache'] = true
 default['yum']['centos-opstools-testing']['managed'] = false
 default['yum']['centos-opstools-testing']['gpgcheck'] = false
 default['yum']['centos-opstools-testing']['baseurl'] =
-  "https://buildlogs.centos.org/centos/$releasever/opstools/$basearch/#{ver.delete_prefix('-')}"
+  "https://buildlogs.centos.org/centos/$releasever/opstools/$basearch/#{ver.gsub(/^-/, '')}"
