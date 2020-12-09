@@ -5,6 +5,7 @@ This file is used to list changes made in each version of the yum-centos cookboo
 ## Unreleased
 
 - Remove CentOS 6 support
+- Update vault repo versions to latest
 
 ## 4.0.2 (2020-07-21)
 

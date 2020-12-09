@@ -22,9 +22,9 @@ os_release = os.release.to_i
 vault_release =
   case os.release.to_i
   when 8
-    '8.0.1905'
+    '8.2.2004'
   when 7
-    '7.7.1908'
+    '7.8.2003'
   end
 
 describe yum.repo "centos-vault-#{vault_release}-base" do

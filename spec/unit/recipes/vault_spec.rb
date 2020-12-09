@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'yum-centos::vault' do
   %w(
-    7.7.1908
-    8.0.1905
+    7.8.2003
+    8.2.2004
   ).each do |v|
     context "centos-#{v.to_i}" do
       platform 'centos', v.split('.')[0]

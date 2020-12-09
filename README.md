@@ -93,8 +93,8 @@ include 'yum-centos::vault'
 ```
 
 The vault repositories only provides binary packages for the previous release which currently defaults to the following:
-- CentOS 7: 7.7.1908
-- CentOS 8: 8.0.1905
+- CentOS 7: 7.8.2003
+- CentOS 8: 8.2.2004
 
 Some repositories provide a version attribute to set which version of the repository to use. Changing these will also
 update the version used in ``mirrorlist`` and ``description``.

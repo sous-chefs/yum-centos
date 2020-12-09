@@ -93,8 +93,8 @@ default_vault_settings = {
 default['yum-centos']['vault_repos'] =
   value_for_platform(%w(centos redhat) =>
   {
-      '>= 8.0' => { '8.0.1905' => default_vault_settings },
-      '~> 7.0' => { '7.7.1908' => default_vault_settings },
+      '>= 8.0' => { '8.2.2004' => default_vault_settings },
+      '~> 7.0' => { '7.8.2003' => default_vault_settings },
   })
 
 # SIG repo versions
