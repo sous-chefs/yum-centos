@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'yum-centos::default' do
-  %w(6 7 8).each do |v|
+  %w(7 8).each do |v|
     context "centos-#{v}" do
       platform 'centos', v
       %w(contrib cr debuginfo fasttrack plus powertools).each do |repo|
@@ -10,7 +10,7 @@ describe 'yum-centos::default' do
         end
       end
       case v.to_i
-      when 6, 7
+      when 7
         it do
           expect(chef_run).to create_yum_repository('base')
             .with(mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os')

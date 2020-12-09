@@ -2,14 +2,13 @@ require 'spec_helper'
 
 describe 'yum-centos::vault' do
   %w(
-    6.9
     7.7.1908
     8.0.1905
   ).each do |v|
     context "centos-#{v.to_i}" do
       platform 'centos', v.split('.')[0]
       case v.to_i
-      when 6, 7
+      when 7
         it do
           expect(chef_run).to create_yum_repository("centos-vault-#{v}-base")
             .with(

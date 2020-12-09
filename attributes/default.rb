@@ -82,29 +82,6 @@ default['yum-centos']['repos'] =
           centos-virt-xen
           centos-virt-xen-testing
         ),
-      '< 7.0' =>
-        %w(
-          base
-          updates
-          extras
-          centosplus
-          fasttrack
-          debuginfo
-          cr
-          contrib
-          centos-azure
-          centos-azure-testing
-          centos-gluster
-          centos-gluster-testing
-          centos-sclo
-          centos-sclo-testing
-          centos-sclo-debuginfo
-          centos-sclo-rh
-          centos-sclo-rh-testing
-          centos-sclo-rh-debuginfo
-          centos-virt-xen
-          centos-virt-xen-testing
-        ),
     })
 default_vault_settings = {
   'enabled' => true,
@@ -118,7 +95,6 @@ default['yum-centos']['vault_repos'] =
   {
       '>= 8.0' => { '8.0.1905' => default_vault_settings },
       '~> 7.0' => { '7.7.1908' => default_vault_settings },
-      '< 7.0' => { '6.9' => default_vault_settings },
   })
 
 # SIG repo versions
@@ -128,7 +104,6 @@ default['yum-centos']['ceph_version'] =
   {
       '>= 8.0' => 'octopus',
       '~> 7.0' => 'nautilus',
-      '< 7.0' => '',
   })
 default['yum-centos']['gluster_version'] = '7'
 default['yum-centos']['nfs_ganesha_version'] =
@@ -143,7 +118,6 @@ default['yum-centos']['openstack_version'] =
   {
       '>= 8.0' => 'ussuri',
       '~> 7.0' => 'train',
-      '< 7.0' => '',
   })
 default['yum-centos']['opstools_version'] =
   value_for_platform(%w(centos redhat) =>
@@ -157,5 +131,4 @@ default['yum-centos']['virt_xen_version'] =
   value_for_platform(%w(centos redhat) =>
   {
       '~> 7.0' => '412',
-      '< 7.0' => '410',
   })

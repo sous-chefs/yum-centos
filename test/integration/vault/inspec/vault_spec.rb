@@ -25,8 +25,6 @@ vault_release =
     '8.0.1905'
   when 7
     '7.7.1908'
-  when 6
-    '6.9'
   end
 
 describe yum.repo "centos-vault-#{vault_release}-base" do
@@ -50,7 +48,7 @@ describe yum.repo "centos-vault-#{vault_release}-extras" do
 end
 
 case os_release
-when 6, 7
+when 7
   describe yum.repo "centos-vault-#{vault_release}-updates" do
     it { should exist }
     it { should be_enabled }

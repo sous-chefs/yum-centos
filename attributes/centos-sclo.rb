@@ -1,4 +1,3 @@
-# centos-release-scl : CentOS 6
 # centos-release-scl : CentOS 7
 default['yum']['centos-sclo']['repositoryid'] = 'centos-sclo'
 default['yum']['centos-sclo']['description'] = 'CentOS-$releasever - SCLo sclo'

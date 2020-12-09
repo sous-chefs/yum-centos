@@ -44,7 +44,7 @@ node['yum-centos']['vault_repos'].each do |release, _config|
     yum_repository "centos-vault-#{release}-#{id}" do
       description "CentOS-#{release} Vault - #{id.capitalize}"
       case node['platform_version'].to_i
-      when 6, 7
+      when 7
         baseurl "http://vault.centos.org/#{release}/#{dir}/$basearch/"
         gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-$releasever'
       when 8
