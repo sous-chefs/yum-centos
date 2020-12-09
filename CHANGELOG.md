@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
-## Unreleased
+## 5.0.0 (2020-12-09)
 
 - Remove CentOS 6 support
 - Update vault repo versions to latest
