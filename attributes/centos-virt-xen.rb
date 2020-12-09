@@ -1,4 +1,3 @@
-# centos-release-xen-410 : CentOS 6
 # centos-release-xen-412 : CentOS 7
 ver = node['yum-centos']['virt_xen_version']
 

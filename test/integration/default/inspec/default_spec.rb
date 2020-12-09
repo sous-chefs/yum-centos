@@ -37,7 +37,7 @@ describe yum.repo 'extras' do
 end
 
 case os_release
-when 6, 7
+when 7
   describe yum.repo 'updates' do
     it { should exist }
     it { should be_enabled }
@@ -51,7 +51,7 @@ when 8
   end
 end
 
-%w(centosplus fasttrack contrib cr debuginfo).each do |repo|
+%w(centosplus fasttrack cr debuginfo).each do |repo|
   describe yum.repo repo do
     it { should_not exist }
     it { should_not be_enabled }

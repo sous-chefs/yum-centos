@@ -1,4 +1,3 @@
-# centos-release-azure : CentOS 6
 # centos-release-azure : CentOS 7
 default['yum']['centos-azure']['repositoryid'] = 'centos-azure'
 default['yum']['centos-azure']['description'] = 'CentOS-$releasever - Azure'

@@ -2,42 +2,57 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## Unreleased
+
+- Remove CentOS 6 support
+- Update vault repo versions to latest
+- MDL fixes
+- Cleanup metadata.rb formatting
+
 ## 4.0.2 (2020-07-21)
 
 ### Fixed
+
 - Fix Chef 12 compatibility (resolves #42)
 
 ### Added
+
 - Kitchen suite for testing against Chef 12
 
 ## 4.0.1 (2020-07-20)
 
 ### Added
+
 - ChefSpec test for non-RHEL systems to ensure compile-time issues are caught
 - Add return in both recipes if the platform family is not RHEL
 
 ### Fixed
+
 - Ensure requiring on cookbook for non-RHEL systems does not return an error (resolves #39)
 
 ## 4.0.0 (2020-07-17)
 
 ### Added
+
 - Add various SIG repos
 - Suite and InSpec tests for vault recipe
 - Add support for multiple release vaults (resolves #28)
 
 ### Changed
+
 - Changed to using $releasever instead of using ``node['platform_version'].to_i``
 - Remove appended ``&infra=$infra`` to mirrorlist URLs as they are not required and make testing easier
 - Update InSpec tests to use yum.repo where it makes sense
 - Re-enable debuginfo and cr repos for CentOS 8 now that they are available
 
 ### Deprecated
+
 - Breaking Change: Remove ``node['yum-centos']['keep_scl_repositories']`` attribute since we manage SCL repos directly
   now
 - Breaking Change: Remove support for XenServer
 
 ### Fixed
+
 - Fix vault recipe and add ``node['yum-centos']['vault_repos']`` attribute for setting which version to use. By
   default use previous release.
 
@@ -66,13 +81,15 @@ This file is used to list changes made in each version of the yum-centos cookboo
 ## 2.1.0 (2016-12-22)
 
 - Allow the use of any valid property via attributes
-- Depend on the latest compat_resource cookbook
+- Depend on the latest `compat_resource` cookbook
 - Cookstyle fixes
 
 ## 2.0.0 (2016-11-25)
+
 - Replace yum dependency with compat_resource
 
 ## 1.0.0 (2016-09-06)
+
 - Add chef_version metadata
 - Testing updates
 - Remove support for Chef 11
@@ -127,7 +144,7 @@ This file is used to list changes made in each version of the yum-centos cookboo
 
 ## v0.4.4 (2015-07-02)
 
-- # 11 - Fix CentOS 7 support and refactor tests to use server spec
+- #11 - Fix CentOS 7 support and refactor tests to use server spec
 
 ## v0.4.3 (2015-06-21)
 
@@ -148,20 +165,20 @@ This file is used to list changes made in each version of the yum-centos cookboo
 
 ## v0.2.2 (2014-02-28)
 
-Adding .repo extensions to the /etc/yum.repos.d/CentOS-* files
+- Adding .repo extensions to the /etc/yum.repos.d/CentOS-\* files
 
 ## v0.2.0 (2014-02-14)
 
-Updating test harness
+- Updating test harness
 
 ## v0.1.4
 
-Version bump for tool chain sanity
+- Version bump for tool chain sanity
 
 ## v0.1.2
 
-Adding CHANGELOG.md
+- Adding CHANGELOG.md
 
 ## v0.1.0
 
-initial release
+- initial release
