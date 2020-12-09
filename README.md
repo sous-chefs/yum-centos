@@ -81,6 +81,7 @@ include 'yum-centos::vault'
 ```
 
 To enable multiple vault releases, you can do the following:
+
 ```ruby
 node['yum-centos']['vault_repos']['7.8']['enabled'] = true
 node['yum-centos']['vault_repos']['7.8']['managed'] = true
@@ -93,6 +94,7 @@ include 'yum-centos::vault'
 ```
 
 The vault repositories only provides binary packages for the previous release which currently defaults to the following:
+
 - CentOS 7: 7.8.2003
 - CentOS 8: 8.2.2004
 
