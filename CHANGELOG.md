@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## Unreleased
+
+- Sous Chefs Adoption
+
 ## 5.0.0 (2020-12-09)
 
 - Remove CentOS 6 support
@@ -11,50 +15,27 @@ This file is used to list changes made in each version of the yum-centos cookboo
 
 ## 4.0.2 (2020-07-21)
 
-### Fixed
-
 - Fix Chef 12 compatibility (resolves #42)
-
-### Added
-
 - Kitchen suite for testing against Chef 12
 
 ## 4.0.1 (2020-07-20)
 
-### Added
-
 - ChefSpec test for non-RHEL systems to ensure compile-time issues are caught
 - Add return in both recipes if the platform family is not RHEL
-
-### Fixed
-
 - Ensure requiring on cookbook for non-RHEL systems does not return an error (resolves #39)
 
 ## 4.0.0 (2020-07-17)
 
-### Added
-
 - Add various SIG repos
 - Suite and InSpec tests for vault recipe
 - Add support for multiple release vaults (resolves #28)
-
-### Changed
-
 - Changed to using $releasever instead of using ``node['platform_version'].to_i``
 - Remove appended ``&infra=$infra`` to mirrorlist URLs as they are not required and make testing easier
 - Update InSpec tests to use yum.repo where it makes sense
 - Re-enable debuginfo and cr repos for CentOS 8 now that they are available
-
-### Deprecated
-
-- Breaking Change: Remove ``node['yum-centos']['keep_scl_repositories']`` attribute since we manage SCL repos directly
-  now
+- Breaking Change: Remove ``node['yum-centos']['keep_scl_repositories']`` attribute since we manage SCL repos directly now
 - Breaking Change: Remove support for XenServer
-
-### Fixed
-
-- Fix vault recipe and add ``node['yum-centos']['vault_repos']`` attribute for setting which version to use. By
-  default use previous release.
+- Fix vault recipe and add ``node['yum-centos']['vault_repos']`` attribute for setting which version to use. By default use previous release.
 
 ## 3.2.0 (2019-10-14)
 
