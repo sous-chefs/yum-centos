@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
-## Unreleased
+## 5.1.0 - *2021-02-25*
 
 - Sous Chefs Adoption
 
