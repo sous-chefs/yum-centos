@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
-## Unreleased
+## 5.1.2 - *2021-08-31*
 
 - Standardise files with files in sous-chefs/repo-management
 
