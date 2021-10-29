@@ -3,45 +3,104 @@
 
 %w(
   ANSIBLE
-  AppStream
+  Advanced-Virtualization
   Azure
   Base
-  centosplus
+  CR
+  Ceph-Jewel
+  Ceph-Luminous
   Ceph-Nautilus
   Ceph-Octopus
-  CR
+  Ceph-Pacific
   Debuginfo
   DotNet
-  Extras
-  fasttrack
-  fdio
+  Gluster-4.1
+  Gluster-5
+  Gluster-6
   Gluster-7
-  HA
+  Gluster-8
+  Gluster-9
+  Linux-AppStream
+  Linux-BaseOS
+  Linux-ContinuousRelease
+  Linux-Debuginfo
+  Linux-Devel
+  Linux-Extras
+  Linux-FastTrack
+  Linux-HighAvailability
+  Linux-Media
+  Linux-Plus
+  Linux-PowerTools
+  Linux-Sources
   Media
   Messaging-qpid-proton
   Messaging-rabbitmq
-  NFS-Ganesha-28
   NFS-Ganesha-3
+  NFS-Ganesha-28
   NFS-Ganesha-30
-  nfv-common
+  NFV-OpenvSwitch
+  NFV-extras
   OpenShift-Origin
+  OpenShift-Origin13
+  OpenShift-Origin14
+  OpenShift-Origin15
+  OpenShift-Origin36
+  OpenShift-Origin37
+  OpenShift-Origin39
+  OpenShift-Origin310
   OpenShift-Origin311
+  OpenStack-queens
+  OpenStack-rocky
   OpenStack-train
+  OpenStack-ussuri
   OpenStack-victoria
+  OpenStack-wallaby
   OpenStack-xena
   OpsTools
-  oVirt-4.3
-  PowerTools
   QEMU-EV
   SCLo-scl
   SCLo-scl-rh
+  SIG-ansible-27
+  SIG-ansible-28
   SIG-ansible-29
+  Samba-411
+  Samba-412
+  Samba-413
+  Samba-414
+  Samba-415
   Sources
   Storage-common
+  Stream-AppStream
+  Stream-BaseOS
+  Stream-Debuginfo
+  Stream-Extras
+  Stream-HighAvailability
+  Stream-Hyperscale
+  Stream-Hyperscale-Experimental
+  Stream-Hyperscale-Hotfixes
+  Stream-Hyperscale-Spin
+  Stream-Media
+  Stream-Plus
+  Stream-PowerTools
+  Stream-RealTime
+  Stream-ResilientStorage
+  Stream-Sources
   Vault
   Xen
+  Xen-46
+  Xen-48
+  Xen-410
   Xen-412
+  Xen-413
+  Xen-414
   Xen-dependencies
+  fasttrack
+  fdio
+  nfv-common
+  oVirt-4.2
+  oVirt-4.3
+  oVirt-4.4
+  x86_64-kernel
 ).each do |name|
   describe file "/etc/yum.repos.d/CentOS-#{name}.repo" do
     it { should_not exist }
@@ -276,13 +335,13 @@ when 7
   describe yum.repo 'centos-ovirt' do
     it { should exist }
     it { should be_enabled }
-    its('mirrors') { should cmp 'http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=virt-ovirt-4.3' }
+    its('mirrors') { should cmp 'http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=virt-ovirt-4.4' }
   end
 
   describe yum.repo 'centos-ovirt-testing' do
     it { should exist }
     it { should be_enabled }
-    its('baseurl') { should cmp 'https://buildlogs.centos.org/centos/7/virt/x86_64/ovirt-4.3/' }
+    its('baseurl') { should cmp 'https://buildlogs.centos.org/centos/7/virt/x86_64/ovirt-4.4/' }
   end
 
   describe yum.repo 'centos-ovirt-debuginfo' do
@@ -342,13 +401,13 @@ when 7
   describe yum.repo 'centos-virt-xen' do
     it { should exist }
     it { should be_enabled }
-    its('mirrors') { should cmp 'http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=virt-xen-412' }
+    its('mirrors') { should cmp 'http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=virt-xen-414' }
   end
 
   describe yum.repo 'centos-virt-xen-testing' do
     it { should exist }
     it { should be_enabled }
-    its('baseurl') { should cmp 'https://buildlogs.centos.org/centos/7/virt/x86_64/xen-412/' }
+    its('baseurl') { should cmp 'https://buildlogs.centos.org/centos/7/virt/x86_64/xen-414/' }
   end
 when 8
   if stream
@@ -545,13 +604,13 @@ when 8
   describe yum.repo 'centos-ovirt' do
     it { should exist }
     it { should be_enabled }
-    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=virt-ovirt-4.4" }
+    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=virt-ovirt-44" }
   end
 
   describe yum.repo 'centos-ovirt-testing' do
     it { should exist }
     it { should be_enabled }
-    its('baseurl') { should cmp "https://buildlogs.centos.org/centos/#{rel}/virt/x86_64/ovirt-4.4/" }
+    its('baseurl') { should cmp "https://buildlogs.centos.org/centos/#{rel}/virt/x86_64/ovirt-44/" }
   end
 
   describe yum.repo 'centos-ovirt-debuginfo' do
@@ -623,5 +682,4 @@ when 8
       should cmp "https://buildlogs.centos.org/centos/#{rel}/storage/x86_64/samba-415/"
     end
   end
-
 end

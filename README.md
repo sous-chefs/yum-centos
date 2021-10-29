@@ -66,7 +66,7 @@ are welcome to override those attributes as they see fit for their environment.
 | centos-samba                   |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-samba415                |
 | centos-sclo-rh                 |:heavy_check_mark:|       :x:        |       :x:        | centos-release-scl-rh                  |
 | centos-sclo                    |:heavy_check_mark:|       :x:        |       :x:        | centos-release-scl                     |
-| centos-virt-xen                |:heavy_check_mark:|       :x:        |       :x:        | centos-release-xen-412                 |
+| centos-virt-xen                |:heavy_check_mark:|       :x:        |       :x:        | centos-release-xen-414                 |
 
 ## Requirements
 

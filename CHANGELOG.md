@@ -7,7 +7,7 @@ This file is used to list changes made in each version of the yum-centos cookboo
 - CentOS Stream 8 support
 - New repos for CS8 only: realtime, resilientstorage, centos-hyperscale
 - New repos for CS8/C8: centos-advanced-virtualization, centos-nfv-extras, centos-samba
-- Update OpenStack, GlusterFS and Ceph releases
+- Update OpenStack, oVirt, Xen, GlusterFS and Ceph releases
 - Update vault version for C8
 
 ## 5.1.2 - *2021-08-31*

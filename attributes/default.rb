@@ -99,8 +99,8 @@ default['yum-centos']['opstools_version'] =
 default['yum-centos']['ovirt_version'] =
   value_for_platform(%w(centos redhat) =>
   {
-      '>= 8.0' => '4.4',
-      '~> 7.0' => '4.3',
+      '>= 8.0' => '44',
+      '~> 7.0' => '4.4',
   })
 default['yum-centos']['rabbitmq_version'] = '38'
 default['yum-centos']['samba_version'] =
@@ -112,5 +112,5 @@ default['yum-centos']['samba_version'] =
 default['yum-centos']['virt_xen_version'] =
   value_for_platform(%w(centos redhat) =>
   {
-      '~> 7.0' => '412',
+      '~> 7.0' => '414',
   })
