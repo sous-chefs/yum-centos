@@ -11,7 +11,7 @@ default['yum']['centos-openstack']['make_cache'] = true
 default['yum']['centos-openstack']['managed'] = false
 default['yum']['centos-openstack']['exclude'] = 'sip,PyQt4'
 default['yum']['centos-openstack']['mirrorlist'] =
-    "http://mirrorlist.centos.org/?release=#{release_var}&arch=$basearch&repo=cloud-openstack-#{ver}"
+  "http://mirrorlist.centos.org/?release=#{release_var}&arch=$basearch&repo=cloud-openstack-#{ver}"
 default['yum']['centos-openstack']['gpgkey'] = 'https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-Cloud'
 # testing
 default['yum']['centos-openstack-testing']['repositoryid'] = 'centos-openstack-testing'
