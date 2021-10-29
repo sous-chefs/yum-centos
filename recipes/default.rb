@@ -31,6 +31,7 @@ end
 node['yum-centos']['repos'].each do |repo|
   next unless node['yum'][repo]['managed']
   case repo
+  # Pull in new repo variables that these packages take care of
   when 'centos-advanced-virtualization'
     package 'centos-release-advanced-virtualization'
 
