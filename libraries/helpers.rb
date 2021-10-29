@@ -54,6 +54,9 @@ module YumCentos
             centos-openstack-debuginfo
             centos-opstools
             centos-opstools-testing
+            centos-ovirt
+            centos-ovirt-testing
+            centos-ovirt-debuginfo
             centos-qpid-proton
             centos-qpid-proton-testing
             centos-qpid-proton-debuginfo
@@ -94,6 +97,9 @@ module YumCentos
             centos-openstack-debuginfo
             centos-opstools
             centos-opstools-testing
+            centos-ovirt
+            centos-ovirt-testing
+            centos-ovirt-debuginfo
             centos-qpid-proton
             centos-qpid-proton-testing
             centos-qpid-proton-debuginfo

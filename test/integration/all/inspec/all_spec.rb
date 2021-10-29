@@ -542,6 +542,24 @@ when 8
     its('baseurl') { should cmp 'https://buildlogs.centos.org/centos/8/opstools/x86_64/collectd-5' }
   end
 
+  describe yum.repo 'centos-ovirt' do
+    it { should exist }
+    it { should be_enabled }
+    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=virt-ovirt-4.4" }
+  end
+
+  describe yum.repo 'centos-ovirt-testing' do
+    it { should exist }
+    it { should be_enabled }
+    its('baseurl') { should cmp "https://buildlogs.centos.org/centos/#{rel}/virt/x86_64/ovirt-4.4/" }
+  end
+
+  describe yum.repo 'centos-ovirt-debuginfo' do
+    it { should exist }
+    it { should be_enabled }
+    its('baseurl') { should cmp "http://debuginfo.centos.org/centos/#{rel}/virt/x86_64/" }
+  end
+
   describe yum.repo 'centos-qpid-proton' do
     it { should exist }
     it { should be_enabled }

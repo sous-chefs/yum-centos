@@ -59,7 +59,7 @@ are welcome to override those attributes as they see fit for their environment.
 | centos-openshift-origin        |:heavy_check_mark:|       :x:        |       :x:        | centos-release-openshift-origin311     |
 | centos-openstack               |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-openstack-xena (CS8) <br> centos-release-openstack-victoria (C8) <br> centos-release-openstack-train (C7) |
 | centos-opstools                |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-opstools                |
-| centos-ovirt                   |:heavy_check_mark:|       :x:        |       :x:        | centos-release-ovirt43                 |
+| centos-ovirt                   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ovirt44 (C8/CS8) <br> centos-release-ovirt43 (C7) |
 | centos-qemu-ev                 |:heavy_check_mark:|       :x:        |       :x:        | centos-release-qemu-ev                 |
 | centos-qpid-proton             |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-qpid-proton             |
 | centos-rabbitmq                |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-rabbitmq-38             |

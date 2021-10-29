@@ -1,5 +1,5 @@
 # centos-release-ovirt43 : CentOS 7
-# centos-release-ovirt44 : CentOS 8
+# centos-release-ovirt44 : CentOS 8 & CS8
 ver = node['yum-centos']['ovirt_version']
 
 default['yum']['centos-ovirt']['repositoryid'] = 'centos-ovirt'
