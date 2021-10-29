@@ -12,6 +12,7 @@ verifier:
 platforms:
   - name: centos-7
   - name: centos-8
+  - name: centos-stream-8
 
 suites:
   - name: default
@@ -20,6 +21,8 @@ suites:
   - name: vault
     run_list:
       - recipe[yum-centos::vault]
+    excludes:
+      - centos-stream-8
   - name: all
     run_list:
       - recipe[yum-centos::default]
@@ -41,6 +44,24 @@ suites:
           managed: true
           enabled: true
         debuginfo:
+          managed: true
+          enabled: true
+        highavailability:
+          managed: true
+          enabled: true
+        realtime:
+          managed: true
+          enabled: true
+        resilientstorage:
+          managed: true
+          enabled: true
+        centos-advanced-virtualization:
+          managed: true
+          enabled: true
+        centos-advanced-virtualization-testing:
+          managed: true
+          enabled: true
+        centos-advanced-virtualization-debuginfo:
           managed: true
           enabled: true
         centos-ansible:
@@ -82,7 +103,16 @@ suites:
         centos-gluster-testing:
           managed: true
           enabled: true
-        highavailability:
+        centos-hyperscale:
+          managed: true
+          enabled: true
+        centos-hyperscale-experimental:
+          managed: true
+          enabled: true
+        centos-hyperscale-hotfixes:
+          managed: true
+          enabled: true
+        centos-hyperscale-spin:
           managed: true
           enabled: true
         centos-nfs-ganesha:
@@ -95,6 +125,15 @@ suites:
           managed: true
           enabled: true
         centos-nfv-common-testing:
+          managed: true
+          enabled: true
+        centos-nfv-extras:
+          managed: true
+          enabled: true
+        centos-nfv-extras-testing:
+          managed: true
+          enabled: true
+        centos-nfv-extras-debuginfo:
           managed: true
           enabled: true
         centos-openshift-origin:
@@ -152,6 +191,12 @@ suites:
           managed: true
           enabled: true
         centos-rabbitmq-debuginfo:
+          managed: true
+          enabled: true
+        centos-samba:
+          managed: true
+          enabled: true
+        centos-samba-testing:
           managed: true
           enabled: true
         centos-sclo:

@@ -19,12 +19,14 @@
 end
 
 os_release = os.release.to_i
+stream = file('/etc/os-release').content.match?('Stream')
+rel = stream ? "#{os_release}-stream" : os_release
 
 describe yum.repo 'base' do
   it { should exist }
   it { should be_enabled }
   if os_release == 8
-    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{os_release}&arch=x86_64&repo=BaseOS" }
+    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=BaseOS" }
   else
     its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{os_release}&arch=x86_64&repo=os" }
   end
@@ -33,7 +35,7 @@ end
 describe yum.repo 'extras' do
   it { should exist }
   it { should be_enabled }
-  its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{os_release}&arch=x86_64&repo=extras" }
+  its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=extras" }
 end
 
 case os_release
@@ -47,7 +49,7 @@ when 8
   describe yum.repo 'appstream' do
     it { should exist }
     it { should be_enabled }
-    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{os_release}&arch=x86_64&repo=AppStream" }
+    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=AppStream" }
   end
 end
 

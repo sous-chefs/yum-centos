@@ -8,7 +8,7 @@ default['yum']['centos-ceph']['enabled'] = false
 default['yum']['centos-ceph']['make_cache'] = true
 default['yum']['centos-ceph']['managed'] = false
 default['yum']['centos-ceph']['mirrorlist'] =
-  "http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=storage-ceph-#{ver}"
+  "http://mirrorlist.centos.org/?release=#{release_var}&arch=$basearch&repo=storage-ceph-#{ver}"
 default['yum']['centos-ceph']['gpgkey'] = 'https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-Storage'
 # testing
 default['yum']['centos-ceph-testing']['repositoryid'] = 'centos-ceph-testing'
@@ -18,4 +18,4 @@ default['yum']['centos-ceph-testing']['make_cache'] = true
 default['yum']['centos-ceph-testing']['managed'] = false
 default['yum']['centos-ceph-testing']['gpgcheck'] = false
 default['yum']['centos-ceph-testing']['baseurl'] =
-  "https://buildlogs.centos.org/centos/$releasever/storage/$basearch/ceph-#{ver}/"
+  "https://buildlogs.centos.org/centos/#{release_var}/storage/$basearch/ceph-#{ver}/"

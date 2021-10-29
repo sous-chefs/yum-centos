@@ -42,10 +42,14 @@ jobs:
         os:
           - 'centos-7'
           - 'centos-8'
+          - 'centos-stream-8'
         suite:
           - 'default'
           - 'vault'
           - 'all'
+        exclude:
+          - os: centos-stream-8
+            suite: vault
       fail-fast: false
 
     steps:

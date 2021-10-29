@@ -2,38 +2,7 @@ default['yum-centos']['repos'] =
   value_for_platform(%w(centos redhat) =>
     {
       # NOTE: Ensure primary OS repos are listed first
-      '>= 8.0' =>
-        %w(
-          base
-          appstream
-          powertools
-          extras
-          centosplus
-          fasttrack
-          debuginfo
-          cr
-          highavailability
-          centos-ansible
-          centos-ansible-testing
-          centos-ansible-debuginfo
-          centos-ceph
-          centos-ceph-testing
-          centos-gluster
-          centos-gluster-testing
-          centos-nfs-ganesha
-          centos-nfs-ganesha-testing
-          centos-openstack
-          centos-openstack-testing
-          centos-openstack-debuginfo
-          centos-opstools
-          centos-opstools-testing
-          centos-qpid-proton
-          centos-qpid-proton-testing
-          centos-qpid-proton-debuginfo
-          centos-rabbitmq
-          centos-rabbitmq-testing
-          centos-rabbitmq-debuginfo
-        ),
+      '>= 8.0' => centos_8_repos,
       '~> 7.0' =>
         %w(
           base
@@ -73,6 +42,8 @@ default['yum-centos']['repos'] =
           centos-ovirt-debuginfo
           centos-qemu-ev
           centos-qemu-ev-testing
+          centos-samba
+          centos-samba-testing
           centos-sclo
           centos-sclo-testing
           centos-sclo-debuginfo
@@ -93,7 +64,7 @@ default_vault_settings = {
 default['yum-centos']['vault_repos'] =
   value_for_platform(%w(centos redhat) =>
   {
-      '>= 8.0' => { '8.2.2004' => default_vault_settings },
+      '>= 8.0' => { '8.3.2011' => default_vault_settings },
       '~> 7.0' => { '7.8.2003' => default_vault_settings },
   })
 
@@ -102,10 +73,10 @@ default['yum-centos']['ansible_version'] = '29'
 default['yum-centos']['ceph_version'] =
   value_for_platform(%w(centos redhat) =>
   {
-      '>= 8.0' => 'octopus',
+      '>= 8.0' => 'pacific',
       '~> 7.0' => 'nautilus',
   })
-default['yum-centos']['gluster_version'] = '7'
+default['yum-centos']['gluster_version'] = '9'
 default['yum-centos']['nfs_ganesha_version'] =
   value_for_platform(%w(centos redhat) =>
   {
@@ -116,7 +87,7 @@ default['yum-centos']['openshift_version'] = '311'
 default['yum-centos']['openstack_version'] =
   value_for_platform(%w(centos redhat) =>
   {
-      '>= 8.0' => 'ussuri',
+      '>= 8.0' => centos_openstack_version,
       '~> 7.0' => 'train',
   })
 default['yum-centos']['opstools_version'] =
@@ -125,8 +96,19 @@ default['yum-centos']['opstools_version'] =
       '>= 8.0' => '-collectd-5',
       '< 8.0' => '',
   })
-default['yum-centos']['ovirt_version'] = '4.3'
+default['yum-centos']['ovirt_version'] =
+  value_for_platform(%w(centos redhat) =>
+  {
+      '>= 8.0' => '4.4',
+      '~> 7.0' => '4.3',
+  })
 default['yum-centos']['rabbitmq_version'] = '38'
+default['yum-centos']['samba_version'] =
+  value_for_platform(%w(centos redhat) =>
+  {
+      '>= 8.0' => '415',
+      '~> 7.0' => '411',
+  })
 default['yum-centos']['virt_xen_version'] =
   value_for_platform(%w(centos redhat) =>
   {

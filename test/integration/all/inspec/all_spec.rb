@@ -27,7 +27,8 @@
   OpenShift-Origin
   OpenShift-Origin311
   OpenStack-train
-  OpenStack-ussuri
+  OpenStack-victoria
+  OpenStack-xena
   OpsTools
   oVirt-4.3
   PowerTools
@@ -48,45 +49,52 @@
 end
 
 os_release = os.release.to_i
+stream = file('/etc/os-release').content.match?('Stream')
+rel = stream ? "#{os_release}-stream" : os_release
 
 describe yum.repo 'base' do
   it { should exist }
   it { should be_enabled }
   if os_release == 8
-    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{os_release}&arch=x86_64&repo=BaseOS" }
+    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=BaseOS" }
   else
-    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{os_release}&arch=x86_64&repo=os" }
+    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=os" }
   end
 end
 
 describe yum.repo 'extras' do
   it { should exist }
   it { should be_enabled }
-  its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{os_release}&arch=x86_64&repo=extras" }
+  its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=extras" }
 end
 
 describe yum.repo 'cr' do
-  it { should exist }
-  it { should be_enabled }
-  its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{os_release}&arch=x86_64&repo=cr" }
+  if stream
+    it { should_not exist }
+    it { should_not be_enabled }
+  else
+    it { should exist }
+    it { should be_enabled }
+    its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=cr" }
+  end
 end
 
 describe yum.repo 'debuginfo' do
   it { should exist }
   it { should be_enabled }
-  its('baseurl') { should cmp "http://debuginfo.centos.org/#{os_release}/x86_64/" }
+  its('baseurl') { should cmp "http://debuginfo.centos.org/#{rel}/x86_64/" }
 end
 
 describe yum.repo 'centos-gluster' do
   it { should exist }
   it { should be_enabled }
-  its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{os_release}&arch=x86_64&repo=storage-gluster-7" }
+  its('mirrors') { should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=storage-gluster-9" }
 end
 
 describe yum.repo 'centos-gluster-testing' do
   it { should exist }
   it { should be_enabled }
-  its('baseurl') { should cmp "https://buildlogs.centos.org/centos/#{os_release}/storage/x86_64/gluster-7/" }
+  its('baseurl') { should cmp "https://buildlogs.centos.org/centos/#{rel}/storage/x86_64/gluster-9/" }
 end
 
 case os_release
@@ -343,6 +351,55 @@ when 7
     its('baseurl') { should cmp 'https://buildlogs.centos.org/centos/7/virt/x86_64/xen-412/' }
   end
 when 8
+  if stream
+    describe yum.repo 'realtime' do
+      it { should exist }
+      it { should be_enabled }
+      its('mirrors') do
+        should cmp 'http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=RT'
+      end
+    end
+
+    describe yum.repo 'resilientstorage' do
+      it { should exist }
+      it { should be_enabled }
+      its('mirrors') do
+        should cmp 'http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=ResilientStorage'
+      end
+    end
+
+    describe yum.repo 'centos-hyperscale' do
+      it { should exist }
+      it { should be_enabled }
+      its('mirrors') do
+        should cmp 'http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=hyperscale-packages-main'
+      end
+    end
+
+    describe yum.repo 'centos-hyperscale-experimental' do
+      it { should exist }
+      it { should be_enabled }
+      its('mirrors') do
+        should cmp 'http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=hyperscale-packages-experimental'
+      end
+    end
+
+    describe yum.repo 'centos-hyperscale-hotfixes' do
+      it { should exist }
+      it { should be_enabled }
+      its('mirrors') do
+        should cmp 'http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=hyperscale-packages-hotfixes'
+      end
+    end
+
+    describe yum.repo 'centos-hyperscale-spin' do
+      it { should exist }
+      it { should be_enabled }
+      its('mirrors') do
+        should cmp 'http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=hyperscale-packages-spin'
+      end
+    end
+  end
   describe yum.repo 'centos-ansible' do
     it { should exist }
     it { should be_enabled }
@@ -371,7 +428,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('mirrors') do
-      should cmp 'http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=AppStream'
+      should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=AppStream"
     end
   end
 
@@ -379,7 +436,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('mirrors') do
-      should cmp 'http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-ceph-octopus'
+      should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=storage-ceph-pacific"
     end
   end
 
@@ -387,7 +444,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('baseurl') do
-      should cmp 'https://buildlogs.centos.org/centos/8/storage/x86_64/ceph-octopus/'
+      should cmp "https://buildlogs.centos.org/centos/#{rel}/storage/x86_64/ceph-pacific/"
     end
   end
 
@@ -395,7 +452,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('mirrors') do
-      should cmp 'http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=HighAvailability'
+      should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=HighAvailability"
     end
   end
 
@@ -403,7 +460,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('mirrors') do
-      should cmp 'http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=storage-nfsganesha-3'
+      should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=storage-nfsganesha-3"
     end
   end
 
@@ -411,7 +468,31 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('baseurl') do
-      should cmp 'https://buildlogs.centos.org/centos/8/storage/x86_64/nfsganesha-3/'
+      should cmp "https://buildlogs.centos.org/centos/#{rel}/storage/x86_64/nfsganesha-3/"
+    end
+  end
+
+  describe yum.repo 'centos-nfv-extras' do
+    it { should exist }
+    it { should be_enabled }
+    its('mirrors') do
+      should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=nfv-network-extras"
+    end
+  end
+
+  describe yum.repo 'centos-nfv-extras-testing' do
+    it { should exist }
+    it { should be_enabled }
+    its('baseurl') do
+      should cmp "http://buildlogs.centos.org/centos/#{rel}/nfv/x86_64/network-extras/"
+    end
+  end
+
+  describe yum.repo 'centos-nfv-extras-debuginfo' do
+    it { should exist }
+    it { should be_enabled }
+    its('baseurl') do
+      should cmp "http://debuginfo.centos.org/centos/#{rel}/nfv/x86_64/"
     end
   end
 
@@ -419,7 +500,11 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('mirrors') do
-      should cmp 'http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=cloud-openstack-ussuri'
+      if stream
+        should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=cloud-openstack-xena"
+      else
+        should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=cloud-openstack-victoria"
+      end
     end
   end
 
@@ -427,7 +512,11 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('baseurl') do
-      should cmp 'https://buildlogs.centos.org/centos/8/cloud/x86_64/openstack-ussuri/'
+      if stream
+        should cmp "https://buildlogs.centos.org/centos/#{rel}/cloud/x86_64/openstack-xena/"
+      else
+        should cmp "https://buildlogs.centos.org/centos/#{rel}/cloud/x86_64/openstack-victoria/"
+      end
     end
   end
 
@@ -435,7 +524,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('baseurl') do
-      should cmp 'http://debuginfo.centos.org/centos/8/cloud/x86_64/'
+      should cmp "http://debuginfo.centos.org/centos/#{rel}/cloud/x86_64/"
     end
   end
 
@@ -481,7 +570,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('mirrors') do
-      should cmp 'http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=messaging-rabbitmq-38'
+      should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=messaging-rabbitmq-38"
     end
   end
 
@@ -489,7 +578,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('baseurl') do
-      should cmp 'https://buildlogs.centos.org/centos/8/messaging/x86_64/rabbitmq-38/'
+      should cmp "https://buildlogs.centos.org/centos/#{rel}/messaging/x86_64/rabbitmq-38/"
     end
   end
 
@@ -497,7 +586,24 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('baseurl') do
-      should cmp 'http://debuginfo.centos.org/centos/8/messaging/x86_64/'
+      should cmp "http://debuginfo.centos.org/centos/#{rel}/messaging/x86_64/"
     end
   end
+
+  describe yum.repo 'centos-samba' do
+    it { should exist }
+    it { should be_enabled }
+    its('mirrors') do
+      should cmp "http://mirrorlist.centos.org/?release=#{rel}&arch=x86_64&repo=storage-samba-415"
+    end
+  end
+
+  describe yum.repo 'centos-samba-testing' do
+    it { should exist }
+    it { should be_enabled }
+    its('baseurl') do
+      should cmp "https://buildlogs.centos.org/centos/#{rel}/storage/x86_64/samba-415/"
+    end
+  end
+
 end

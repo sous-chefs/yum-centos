@@ -30,6 +30,16 @@ end
 
 node['yum-centos']['repos'].each do |repo|
   next unless node['yum'][repo]['managed']
+  case repo
+  when 'centos-advanced-virtualization'
+    package 'centos-release-advanced-virtualization'
+
+    file '/etc/yum.repos.d/CentOS-Advanced-Virtualization.repo' do
+      action :delete
+    end
+  when 'centos-nfv-extras'
+    package 'centos-release-nfv-common'
+  end
   yum_repository repo do
     node['yum'][repo].each do |config, value|
       case config
