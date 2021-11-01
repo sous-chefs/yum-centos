@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
-## Unreleased
+## 5.2.0 - *2021-11-01*
 
 - CentOS Stream 8 support
 - New repos for CS8 only: realtime, resilientstorage, centos-hyperscale
