@@ -12,25 +12,28 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ## Overview
 
-The yum-centos cookbook takes over management of the default and optional repositoryids that ship with CentOS systems.
+The yum-centos cookbook takes over management of the default and optional repositoryids that ship with CentOS and CentOS
+Stream systems.
 
 Below is a table showing which repositoryids we manage that are shipped by default with CentOS via the centos-release
 package:
 
-| Repo ID          | CentOS 7         | CentOS 8         |
-| ---------------- | :--------------: | :--------------: |
-| appstream        |       :x:        |:heavy_check_mark:|
-| base             |:heavy_check_mark:|:heavy_check_mark:|
-| centos-kernel    |:heavy_check_mark:|       :x:        |
-| centosplus       |:heavy_check_mark:|:heavy_check_mark:|
-| contrib          |       :x:        |       :x:        |
-| cr               |:heavy_check_mark:|:heavy_check_mark:|
-| debuginfo        |:heavy_check_mark:|:heavy_check_mark:|
-| extras           |:heavy_check_mark:|:heavy_check_mark:|
-| fasttrack        |:heavy_check_mark:|:heavy_check_mark:|
-| highavailability |       :x:        |:heavy_check_mark:|
-| powertools       |       :x:        |:heavy_check_mark:|
-| updates          |:heavy_check_mark:|       :x:        |
+| Repo ID          | CentOS 7         | CentOS 8         | CentOS Stream 8  |
+| ---------------- | :--------------: | :--------------: | :--------------: |
+| appstream        |       :x:        |:heavy_check_mark:|:heavy_check_mark:|
+| base             |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+| centos-kernel    |:heavy_check_mark:|       :x:        |       :x:        |
+| centosplus       |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+| contrib          |       :x:        |       :x:        |       :x:        |
+| cr               |:heavy_check_mark:|:heavy_check_mark:|       :x:        |
+| debuginfo        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+| extras           |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+| fasttrack        |:heavy_check_mark:|:heavy_check_mark:|       :x:        |
+| highavailability |       :x:        |:heavy_check_mark:|:heavy_check_mark:|
+| powertools       |       :x:        |:heavy_check_mark:|:heavy_check_mark:|
+| realtime         |       :x:        |       :x:        |:heavy_check_mark:|
+| resilientstorage |       :x:        |       :x:        |:heavy_check_mark:|
+| updates          |:heavy_check_mark:|       :x:        |       :x:        |
 
 Additionally, this cookbook can manage the following CentOS repositories that can *optionally* be installed.  The table
 below displays each repositories we support, which platform version they are supported on and what upstream release
@@ -41,25 +44,29 @@ repositories.
 While upstream may provide additional versions for the repositories below, we only maintain the current release. Users
 are welcome to override those attributes as they see fit for their environment.
 
-| Repo ID                 | CentOS 7         | CentOS 8         | Upstream release package     |
-| ----------------------- | :--------------: | :--------------: | ---------------------------- |
-| centos-ansible          |:heavy_check_mark:|:heavy_check_mark:| centos-release-ansible-29    |
-| centos-azure            |:heavy_check_mark:|       :x:        | centos-release-azure         |
-| centos-ceph             |:heavy_check_mark:|:heavy_check_mark:| centos-release-ceph-octopus (C8) <br> centos-release-ceph-nautilus (C7) |
-| centos-dotnet           |:heavy_check_mark:|       :x:        | centos-release-dotnet        |
-| centos-fdio             |:heavy_check_mark:|       :x:        | centos-release-fdio          |
-| centos-gluster          |:heavy_check_mark:|:heavy_check_mark:| centos-release-gluster7      |
-| centos-nfs-ganesha      |:heavy_check_mark:|:heavy_check_mark:| centos-release-nfs-ganesha30 |
-| centos-openshift-origin |:heavy_check_mark:|       :x:        | centos-release-openshift-origin311 |
-| centos-openstack        |:heavy_check_mark:|:heavy_check_mark:| centos-release-openstack-ussuri (C8) <br> centos-release-openstack-train (C7) |
-| centos-opstools         |:heavy_check_mark:|:heavy_check_mark:| centos-release-opstools      |
-| centos-ovirt            |:heavy_check_mark:|       :x:        | centos-release-ovirt43       |
-| centos-qemu-ev          |:heavy_check_mark:|       :x:        | centos-release-qemu-ev       |
-| centos-qpid-proton      |       :x:        |:heavy_check_mark:| centos-release-qpid-proton   |
-| centos-rabbitmq         |       :x:        |:heavy_check_mark:| centos-release-rabbitmq-38   |
-| centos-sclo-rh          |:heavy_check_mark:|       :x:        | centos-release-scl-rh        |
-| centos-sclo             |:heavy_check_mark:|       :x:        | centos-release-scl           |
-| centos-virt-xen         |:heavy_check_mark:|       :x:        | centos-release-xen-412       |
+| Repo ID                        | CentOS 7         | CentOS 8         | CentOS Stream 8  | Upstream release package               |
+| ------------------------------ | :--------------: | :--------------: | :--------------: | -------------------------------------- |
+| centos-advanced-virtualization |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-advanced-virtualization |
+| centos-ansible                 |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ansible-29              |
+| centos-azure                   |:heavy_check_mark:|       :x:        |       :x:        | centos-release-azure                   |
+| centos-ceph                    |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ceph-pacific (C8/CS8) <br> centos-release-ceph-nautilus (C7) |
+| centos-dotnet                  |:heavy_check_mark:|       :x:        |       :x:        | centos-release-dotnet                  |
+| centos-fdio                    |:heavy_check_mark:|       :x:        |       :x:        | centos-release-fdio                    |
+| centos-gluster                 |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-gluster9                |
+| centos-hyperscale              |       :x:        |       :x:        |:heavy_check_mark:| centos-release-hyperscale              |
+| centos-nfs-ganesha             |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-nfs-ganesha30           |
+| centos-nfv-extras              |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-nfv-extras              |
+| centos-openshift-origin        |:heavy_check_mark:|       :x:        |       :x:        | centos-release-openshift-origin311     |
+| centos-openstack               |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-openstack-xena (CS8) <br> centos-release-openstack-victoria (C8) <br> centos-release-openstack-train (C7) |
+| centos-opstools                |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-opstools                |
+| centos-ovirt                   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ovirt44 (C8/CS8) <br> centos-release-ovirt43 (C7) |
+| centos-qemu-ev                 |:heavy_check_mark:|       :x:        |       :x:        | centos-release-qemu-ev                 |
+| centos-qpid-proton             |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-qpid-proton             |
+| centos-rabbitmq                |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-rabbitmq-38             |
+| centos-samba                   |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-samba415                |
+| centos-sclo-rh                 |:heavy_check_mark:|       :x:        |       :x:        | centos-release-scl-rh                  |
+| centos-sclo                    |:heavy_check_mark:|       :x:        |       :x:        | centos-release-scl                     |
+| centos-virt-xen                |:heavy_check_mark:|       :x:        |       :x:        | centos-release-xen-414                 |
 
 ## Requirements
 
@@ -106,7 +113,9 @@ include 'yum-centos::vault'
 The vault repositories only provides binary packages for the previous release which currently defaults to the following:
 
 - CentOS 7: 7.8.2003
-- CentOS 8: 8.2.2004
+- CentOS 8: 8.3.2011
+
+NOTE: CentOS Stream does not provide binaries via the vault repo
 
 Some repositories provide a version attribute to set which version of the repository to use. Changing these will also
 update the version used in ``mirrorlist`` and ``description``.
@@ -163,8 +172,8 @@ include_recipe 'yum-centos'
 ## Recipes
 
 - `yum-centos::default` Generates `yum_repository` configs for latest CentOS release. By default the `base`, `extras`,
-  and `updates` repos are enabled on CentOS 7. For CentOS 8, `base`, `extras` and `appstream` repos are enabled by
-  default.
+  and `updates` repos are enabled on CentOS 7. For CentOS 8 and CentOS Stream 8, `base`, `extras` and `appstream` repos
+  are enabled by default.
 
 _NOTE: If you are running an older CentOS release, i.e. 7.7 when 7.8 is the latest 7.x release, you may want to consider the `yum-centos::vault` recipe._
 

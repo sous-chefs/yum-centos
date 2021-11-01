@@ -1,6 +1,6 @@
 default['yum']['debuginfo']['repositoryid'] = 'debuginfo'
-default['yum']['debuginfo']['description'] = 'CentOS-$releasever - Debuginfo'
-default['yum']['debuginfo']['baseurl'] = 'http://debuginfo.centos.org/$releasever/$basearch/'
+default['yum']['debuginfo']['description'] = "#{centos_description} - Debuginfo"
+default['yum']['debuginfo']['baseurl'] = "http://debuginfo.centos.org/#{release_var}/$basearch/"
 default['yum']['debuginfo']['enabled'] = false
 default['yum']['debuginfo']['make_cache'] = true
 default['yum']['debuginfo']['managed'] = false

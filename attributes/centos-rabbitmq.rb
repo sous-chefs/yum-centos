@@ -7,7 +7,7 @@ default['yum']['centos-rabbitmq']['enabled'] = false
 default['yum']['centos-rabbitmq']['make_cache'] = true
 default['yum']['centos-rabbitmq']['managed'] = false
 default['yum']['centos-rabbitmq']['mirrorlist'] =
-  "http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=messaging-rabbitmq-#{ver}"
+  "http://mirrorlist.centos.org/?release=#{release_var}&arch=$basearch&repo=messaging-rabbitmq-#{ver}"
 # The Messaging SIG is currently in planning/onboarding so the key only exists in the release package or the git repo
 # https://wiki.centos.org/SpecialInterestGroup/Messaging
 default['yum']['centos-rabbitmq']['gpgkey'] =
@@ -20,7 +20,7 @@ default['yum']['centos-rabbitmq-testing']['make_cache'] = true
 default['yum']['centos-rabbitmq-testing']['managed'] = false
 default['yum']['centos-rabbitmq-testing']['gpgcheck'] = false
 default['yum']['centos-rabbitmq-testing']['baseurl'] =
-  "https://buildlogs.centos.org/centos/$releasever/messaging/$basearch/rabbitmq-#{ver}/"
+  "https://buildlogs.centos.org/centos/#{release_var}/messaging/$basearch/rabbitmq-#{ver}/"
 # debuginfo
 default['yum']['centos-rabbitmq-debuginfo']['repositoryid'] = 'centos-rabbitmq-debuginfo'
 default['yum']['centos-rabbitmq-debuginfo']['description'] = "CentOS-$releasever - RabbitMQ #{ver} - Debuginfo"
@@ -28,6 +28,6 @@ default['yum']['centos-rabbitmq-debuginfo']['enabled'] = false
 default['yum']['centos-rabbitmq-debuginfo']['make_cache'] = true
 default['yum']['centos-rabbitmq-debuginfo']['managed'] = false
 default['yum']['centos-rabbitmq-debuginfo']['baseurl'] =
-  'http://debuginfo.centos.org/centos/$releasever/messaging/$basearch/'
+  "http://debuginfo.centos.org/centos/#{release_var}/messaging/$basearch/"
 default['yum']['centos-rabbitmq-debuginfo']['gpgkey'] =
   'https://git.centos.org/rpms/centos-release-messaging/raw/c8-sig-messaging/f/SOURCES/RPM-GPG-KEY-CentOS-SIG-Messaging'
