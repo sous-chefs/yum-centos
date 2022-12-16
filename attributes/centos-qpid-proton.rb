@@ -5,7 +5,7 @@ default['yum']['centos-qpid-proton']['enabled'] = false
 default['yum']['centos-qpid-proton']['make_cache'] = true
 default['yum']['centos-qpid-proton']['managed'] = false
 default['yum']['centos-qpid-proton']['mirrorlist'] =
-  'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=messaging-qpid-proton'
+  'http://mirrorlist.centos.org/?release=$stream&arch=$basearch&repo=messaging-qpid-proton'
 # The Messaging SIG is currently in planning/onboarding so the key only exists in the release package or the git repo
 # https://wiki.centos.org/SpecialInterestGroup/Messaging
 default['yum']['centos-qpid-proton']['gpgkey'] =

@@ -7,6 +7,8 @@ This file is used to list changes made in each version of the yum-centos cookboo
 - Remove testing for CentOS 8 (EOL'd)
    - Will remove support in the next major release
 - Fix workflow CI
+- Fix mirrorlist for centos-opstools, centos-qpid-proton & centosplus for EL8
+- Remove fasttrack for EL8
 
 ## 5.2.0 - *2021-11-01*
 
