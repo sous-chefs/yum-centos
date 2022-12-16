@@ -4,6 +4,10 @@ This file is used to list changes made in each version of the yum-centos cookboo
 
 ## Unreleased
 
+- Remove testing for CentOS 8 (EOL'd)
+   - Will remove support in the next major release
+- Fix workflow CI
+
 ## 5.2.0 - *2021-11-01*
 
 - CentOS Stream 8 support

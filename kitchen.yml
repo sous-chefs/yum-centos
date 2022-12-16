@@ -11,7 +11,6 @@ verifier:
 
 platforms:
   - name: centos-7
-  - name: centos-8
   - name: centos-stream-8
 
 suites:

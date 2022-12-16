@@ -27,11 +27,6 @@ platforms:
       pid_one_command: /usr/lib/systemd/systemd
       chef_version: '12.15.19'
 
-  - name: centos-8
-    driver:
-      image: dokken/centos-8
-      pid_one_command: /usr/lib/systemd/systemd
-
   - name: centos-stream-8
     driver:
       image: dokken/centos-stream-8
