@@ -8,7 +8,11 @@ default['yum']['centos-opstools']['enabled'] = false
 default['yum']['centos-opstools']['make_cache'] = true
 default['yum']['centos-opstools']['managed'] = false
 default['yum']['centos-opstools']['mirrorlist'] =
-  "http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=opstools#{ver}"
+  if node['platform_version'].to_i >= 8
+    "http://mirrorlist.centos.org/?release=$releasever-stream&arch=$basearch&repo=opstools#{ver}"
+  else
+    "http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=opstools#{ver}"
+  end
 default['yum']['centos-opstools']['gpgkey'] = 'https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-OpsTools'
 # testing
 default['yum']['centos-opstools-testing']['repositoryid'] = 'centos-opstools-testing'

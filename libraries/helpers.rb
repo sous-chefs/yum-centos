@@ -25,7 +25,6 @@ module YumCentos
             powertools
             extras
             centosplus
-            fasttrack
             debuginfo
             highavailability
             realtime

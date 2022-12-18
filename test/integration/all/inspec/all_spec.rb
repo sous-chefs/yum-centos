@@ -591,7 +591,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('mirrors') do
-      should cmp 'http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=opstools-collectd-5'
+      should cmp 'http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=opstools-collectd-5'
     end
   end
 
@@ -623,7 +623,7 @@ when 8
     it { should exist }
     it { should be_enabled }
     its('mirrors') do
-      should cmp 'http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=messaging-qpid-proton'
+      should cmp 'http://mirrorlist.centos.org/?release=8-stream&arch=x86_64&repo=messaging-qpid-proton'
     end
   end
 
