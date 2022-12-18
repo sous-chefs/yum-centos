@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
-## Unreleased
+## 5.2.1 - *2022-12-18*
 
 - Remove testing for CentOS 8 (EOL'd)
    - Will remove support in the next major release
