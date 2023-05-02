@@ -49,7 +49,7 @@ are welcome to override those attributes as they see fit for their environment.
 | centos-advanced-virtualization |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-advanced-virtualization |
 | centos-ansible                 |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ansible-29              |
 | centos-azure                   |:heavy_check_mark:|       :x:        |       :x:        | centos-release-azure                   |
-| centos-ceph                    |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ceph-pacific (C8/CS8) <br> centos-release-ceph-nautilus (C7) |
+| centos-ceph                    |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ceph-pacific (C8/CS8),  centos-release-ceph-nautilus (C7) |
 | centos-dotnet                  |:heavy_check_mark:|       :x:        |       :x:        | centos-release-dotnet                  |
 | centos-fdio                    |:heavy_check_mark:|       :x:        |       :x:        | centos-release-fdio                    |
 | centos-gluster                 |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-gluster9                |
@@ -57,9 +57,9 @@ are welcome to override those attributes as they see fit for their environment.
 | centos-nfs-ganesha             |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-nfs-ganesha30           |
 | centos-nfv-extras              |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-nfv-extras              |
 | centos-openshift-origin        |:heavy_check_mark:|       :x:        |       :x:        | centos-release-openshift-origin311     |
-| centos-openstack               |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-openstack-xena (CS8) <br> centos-release-openstack-victoria (C8) <br> centos-release-openstack-train (C7) |
+| centos-openstack               |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-openstack-xena (CS8), centos-release-openstack-victoria (C8), centos-release-openstack-train (C7) |
 | centos-opstools                |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-opstools                |
-| centos-ovirt                   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ovirt44 (C8/CS8) <br> centos-release-ovirt43 (C7) |
+| centos-ovirt                   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ovirt44 (C8/CS8), centos-release-ovirt43 (C7) |
 | centos-qemu-ev                 |:heavy_check_mark:|       :x:        |       :x:        | centos-release-qemu-ev                 |
 | centos-qpid-proton             |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-qpid-proton             |
 | centos-rabbitmq                |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-rabbitmq-38             |
@@ -157,8 +157,8 @@ default['yum-centos']['virt_xen_version'] =
   })
 ```
 
-_NOTE: If you are migrating from using `node['yum-centos']['keep_scl_repositories']`, you will need to do the following
-  to enable the repositories using this cookbook:_
+**NOTE**: If you are migrating from using `node['yum-centos']['keep_scl_repositories']`, you will need to do the following
+  to enable the repositories using this cookbook:
 
 ```ruby
 node.default['yum']['centos-sclo']['enabled'] = true
@@ -175,7 +175,7 @@ include_recipe 'yum-centos'
   and `updates` repos are enabled on CentOS 7. For CentOS 8 and CentOS Stream 8, `base`, `extras` and `appstream` repos
   are enabled by default.
 
-_NOTE: If you are running an older CentOS release, i.e. 7.7 when 7.8 is the latest 7.x release, you may want to consider the `yum-centos::vault` recipe._
+**NOTE**: If you are running an older CentOS release, i.e. 7.7 when 7.8 is the latest 7.x release, you may want to consider the `yum-centos::vault` recipe.
 
 ```ruby
   yum_repository 'base' do
