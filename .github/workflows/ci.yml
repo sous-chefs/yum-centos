@@ -9,7 +9,7 @@ name: ci
 
 jobs:
   lint-unit:
-    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@0.0.3
+    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@2.0.1
     permissions:
       actions: write
       checks: write
@@ -23,12 +23,12 @@ jobs:
     strategy:
       matrix:
         os:
-          - 'centos-7'
-          - 'centos-stream-8'
+          - "centos-7"
+          - "centos-stream-8"
         suite:
-          - 'default'
-          - 'vault'
-          - 'all'
+          - "default"
+          - "vault"
+          - "all"
         exclude:
           - os: centos-stream-8
             suite: vault
@@ -50,6 +50,6 @@ jobs:
       - name: Print debug output on failure
         if: failure()
         run: |
-            set -x
-            sudo journalctl -l --since today
-            KITCHEN_LOCAL_YAML=kitchen.dokken.yml /usr/bin/kitchen exec ${{ matrix.suite }}-${{ matrix.os }} -c "journalctl -l"
+          set -x
+          sudo journalctl -l --since today
+          KITCHEN_LOCAL_YAML=kitchen.dokken.yml /usr/bin/kitchen exec ${{ matrix.suite }}-${{ matrix.os }} -c "journalctl -l"
