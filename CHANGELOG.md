@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
-## Unreleased
+## 5.2.6 - *2023-09-29*
 
 ## 5.2.5 - *2023-07-10*
 
