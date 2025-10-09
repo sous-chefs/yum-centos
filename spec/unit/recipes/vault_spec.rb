@@ -6,7 +6,7 @@ describe 'yum-centos::vault' do
     8.3.2011
   ).each do |v|
     context "centos-#{v.to_i}" do
-      platform 'centos', v.split('.')[0]
+      platform 'centos', v.split('.').first
       case v.to_i
       when 7
         it do
