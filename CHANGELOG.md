@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## [5.2.12](https://github.com/sous-chefs/yum-centos/compare/5.2.11...v5.2.12) (2025-10-16)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#75](https://github.com/sous-chefs/yum-centos/issues/75)) ([39a1064](https://github.com/sous-chefs/yum-centos/commit/39a10641423d3ceeda0ac5ab44083d59a78922a7))
+
 ## 5.2.1 - *2022-12-18*
 
 * Remove testing for CentOS 8 (EOL'd)
