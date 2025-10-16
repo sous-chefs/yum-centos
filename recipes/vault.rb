@@ -19,7 +19,7 @@ return unless platform_family?('rhel')
 
 include_recipe 'yum-centos::default'
 
-node['yum-centos']['vault_repos'].each do |release, _config|
+node['yum-centos']['vault_repos'].each_key do |release|
   node['yum-centos']['repos'].each do |id|
     next unless node['yum'][id]['managed']
     next unless node['yum-centos']['vault_repos'][release]['managed']
@@ -53,7 +53,7 @@ node['yum-centos']['vault_repos'].each do |release, _config|
       end
       node['yum-centos']['vault_repos'][release].each do |config, value|
         case config
-        when 'managed' # rubocop: disable Lint/EmptyWhen
+        when 'managed'
         when 'baseurl'
           send(config.to_sym, lazy { value })
         else
