@@ -2,6 +2,8 @@
 
 Manage one CentOS Stream 9/10 DNF repository definition.
 
+See [MIGRATION.md](../MIGRATION.md) for migration guidance from the old attribute-driven cookbook model.
+
 ## Actions
 
 - `:create`: Creates the main, debuginfo, and source repo definitions for the selected repo ID.

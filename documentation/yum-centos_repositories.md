@@ -2,6 +2,8 @@
 
 Manage a collection of CentOS Stream 9/10 repositories and optionally purge the stock vendor repo files first.
 
+See [MIGRATION.md](../MIGRATION.md) for migration examples from the old `node['yum'][repo_id]` attribute model.
+
 ## Actions
 
 - `:create`: Purges stock repo files and converges the selected repo IDs.
@@ -45,3 +47,24 @@ yum_centos_repositories 'default-plus-legacy-aliases' do
   enable_repo_ids %w(powertools realtime)
 end
 ```
+
+## Migration
+
+If you previously enabled repos with attribute toggles such as:
+
+```ruby
+node.default['yum']['highavailability']['managed'] = true
+node.default['yum']['highavailability']['enabled'] = true
+
+include_recipe 'yum-centos::default'
+```
+
+replace that with:
+
+```ruby
+yum_centos_repositories 'default-plus-ha' do
+  enable_repo_ids %w(highavailability)
+end
+```
+
+For more detailed mappings and caveats, see [MIGRATION.md](../MIGRATION.md).
