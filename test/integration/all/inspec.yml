@@ -1,0 +1,7 @@
+---
+name: all
+title: All Suite
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Verifies the full yum-centos repository catalog
+version: 1.0.0
