@@ -8,227 +8,89 @@
 
 ## Maintainers
 
-This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of Chef cookbook maintainers working together to maintain important cookbooks. If you’d like to know more please visit sous-chefs.org or come chat with us on the Chef Community Slack in #sous-chefs.
+This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of Chef cookbook maintainers working together to maintain important cookbooks. If you'd like to know more please visit sous-chefs.org or come chat with us on the Chef Community Slack in `#sous-chefs`.
 
 ## Overview
 
-The yum-centos cookbook takes over management of the default and optional repositoryids that ship with CentOS and CentOS
-Stream systems.
+The yum-centos cookbook manages the DNF repository definitions that ship with CentOS Stream.
 
-Below is a table showing which repositoryids we manage that are shipped by default with CentOS via the centos-release
-package:
+This cookbook now officially supports CentOS Stream 9 and CentOS Stream 10 only. The supported repo IDs are:
 
-| Repo ID          | CentOS 7         | CentOS 8         | CentOS Stream 8  |
-| ---------------- | :--------------: | :--------------: | :--------------: |
-| appstream        |       :x:        |:heavy_check_mark:|:heavy_check_mark:|
-| base             |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-| centos-kernel    |:heavy_check_mark:|       :x:        |       :x:        |
-| centosplus       |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-| contrib          |       :x:        |       :x:        |       :x:        |
-| cr               |:heavy_check_mark:|:heavy_check_mark:|       :x:        |
-| debuginfo        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-| extras           |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-| fasttrack        |:heavy_check_mark:|:heavy_check_mark:|       :x:        |
-| highavailability |       :x:        |:heavy_check_mark:|:heavy_check_mark:|
-| powertools       |       :x:        |:heavy_check_mark:|:heavy_check_mark:|
-| realtime         |       :x:        |       :x:        |:heavy_check_mark:|
-| resilientstorage |       :x:        |       :x:        |:heavy_check_mark:|
-| updates          |:heavy_check_mark:|       :x:        |       :x:        |
+- `baseos`
+- `appstream`
+- `extras-common`
+- `crb`
+- `highavailability`
+- `nfv`
+- `rt`
+- `resilientstorage`
 
-Additionally, this cookbook can manage the following CentOS repositories that can *optionally* be installed.  The table
-below displays each repositories we support, which platform version they are supported on and what upstream release
-package it effectively replaces. Some of these repositories may depend on another related repository. This cookbook
-*does not* automatically account for such dependencies and this is up to the user to configure the appropriate
-repositories.
-
-While upstream may provide additional versions for the repositories below, we only maintain the current release. Users
-are welcome to override those attributes as they see fit for their environment.
-
-| Repo ID                        | CentOS 7         | CentOS 8         | CentOS Stream 8  | Upstream release package               |
-| ------------------------------ | :--------------: | :--------------: | :--------------: | -------------------------------------- |
-| centos-advanced-virtualization |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-advanced-virtualization |
-| centos-ansible                 |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ansible-29              |
-| centos-azure                   |:heavy_check_mark:|       :x:        |       :x:        | centos-release-azure                   |
-| centos-ceph                    |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ceph-pacific (C8/CS8),  centos-release-ceph-nautilus (C7) |
-| centos-dotnet                  |:heavy_check_mark:|       :x:        |       :x:        | centos-release-dotnet                  |
-| centos-fdio                    |:heavy_check_mark:|       :x:        |       :x:        | centos-release-fdio                    |
-| centos-gluster                 |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-gluster9                |
-| centos-hyperscale              |       :x:        |       :x:        |:heavy_check_mark:| centos-release-hyperscale              |
-| centos-nfs-ganesha             |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-nfs-ganesha30           |
-| centos-nfv-extras              |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-nfv-extras              |
-| centos-openshift-origin        |:heavy_check_mark:|       :x:        |       :x:        | centos-release-openshift-origin311     |
-| centos-openstack               |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-openstack-xena (CS8), centos-release-openstack-victoria (C8), centos-release-openstack-train (C7) |
-| centos-opstools                |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-opstools                |
-| centos-ovirt                   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:| centos-release-ovirt44 (C8/CS8), centos-release-ovirt43 (C7) |
-| centos-qemu-ev                 |:heavy_check_mark:|       :x:        |       :x:        | centos-release-qemu-ev                 |
-| centos-qpid-proton             |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-qpid-proton             |
-| centos-rabbitmq                |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-rabbitmq-38             |
-| centos-samba                   |       :x:        |:heavy_check_mark:|:heavy_check_mark:| centos-release-samba415                |
-| centos-sclo-rh                 |:heavy_check_mark:|       :x:        |       :x:        | centos-release-scl-rh                  |
-| centos-sclo                    |:heavy_check_mark:|       :x:        |       :x:        | centos-release-scl                     |
-| centos-virt-xen                |:heavy_check_mark:|       :x:        |       :x:        | centos-release-xen-414                 |
+Use `yum_centos_repository` to manage one repo and `yum_centos_repositories` to manage the default or full set. For lifecycle and architecture limits, see [LIMITATIONS.md](LIMITATIONS.md).
 
 ## Requirements
 
 ### Platforms
 
-- CentOS
+- CentOS Stream 9
+- CentOS Stream 10
 
 ### Chef
 
-- Chef 12.14+
+- Chef 16.10+
 
 ### Cookbooks
 
 - none
 
-## Attributes
+## Resources
 
-See individual repository attribute files for defaults.
+- [yum_centos_repository](documentation/yum-centos_repository.md) manages a single CentOS Stream repo definition.
+- [yum_centos_repositories](documentation/yum-centos_repositories.md) manages the default or full supported repo set.
 
-If using the vault recipe, you can set ``node['yum-centos']['vault_repos']``. See below for an example for CentOS 8:
+## Usage
 
-```ruby
-# Enable 8.0.1905 vault release
-node['yum-centos']['vault_repos']['8.0.1905']['enabled'] = true
-node['yum-centos']['vault_repos']['8.0.1905']['managed'] = true
-node['yum-centos']['vault_repos']['8.0.1905']['make_cache'] = true
-
-include 'yum-centos::vault'
-```
-
-To enable multiple vault releases, you can do the following:
+Manage the default enabled repo set:
 
 ```ruby
-node['yum-centos']['vault_repos']['7.8']['enabled'] = true
-node['yum-centos']['vault_repos']['7.8']['managed'] = true
-node['yum-centos']['vault_repos']['7.8']['make_cache'] = true
-node['yum-centos']['vault_repos']['7.9']['enabled'] = true
-node['yum-centos']['vault_repos']['7.9']['managed'] = true
-node['yum-centos']['vault_repos']['7.9']['make_cache'] = true
-
-include 'yum-centos::vault'
+yum_centos_repositories 'default'
 ```
 
-The vault repositories only provides binary packages for the previous release which currently defaults to the following:
-
-- CentOS 7: 7.8.2003
-- CentOS 8: 8.3.2011
-
-NOTE: CentOS Stream does not provide binaries via the vault repo
-
-Some repositories provide a version attribute to set which version of the repository to use. Changing these will also
-update the version used in ``mirrorlist`` and ``description``.
+Manage one optional repo directly:
 
 ```ruby
-default['yum-centos']['ansible_version'] = '29'
-default['yum-centos']['ceph_version'] =
-  value_for_platform(%w(centos redhat) =>
-  {
-      '>= 8.0' => 'octopus',
-      '~> 7.0' => 'nautilus',
-  })
-default['yum-centos']['gluster_version'] = '7'
-default['yum-centos']['nfs_ganesha_version'] =
-  value_for_platform(%w(centos redhat) =>
-  {
-      '>= 8.0' => '3',
-      '~> 7.0' => '30',
-  })
-default['yum-centos']['openshift_version'] = '311'
-default['yum-centos']['openstack_version'] =
-  value_for_platform(%w(centos redhat) =>
-  {
-      '>= 8.0' => 'ussuri',
-      '~> 7.0' => 'train',
-  })
-default['yum-centos']['opstools_version'] =
-  value_for_platform(%w(centos redhat) =>
-  {
-      '>= 8.0' => '-collectd-5',
-      '< 8.0' => '',
-  })
-default['yum-centos']['ovirt_version'] = '4.3'
-default['yum-centos']['rabbitmq_version'] = '38'
-default['yum-centos']['virt_xen_version'] =
-  value_for_platform(%w(centos redhat) =>
-  {
-      '~> 7.0' => '412',
-  })
+yum_centos_repository 'crb' do
+  enabled true
+end
 ```
 
-**NOTE**: If you are migrating from using `node['yum-centos']['keep_scl_repositories']`, you will need to do the following
-  to enable the repositories using this cookbook:
+Manage the full supported repo catalog:
 
 ```ruby
-node.default['yum']['centos-sclo']['enabled'] = true
-node.default['yum']['centos-sclo']['managed'] = true
-node.default['yum']['centos-sclo-rh']['enabled'] = true
-node.default['yum']['centos-sclo-rh']['managed'] = true
+yum_centos_repositories 'all' do
+  repo_ids %w(
+    baseos
+    appstream
+    extras-common
+    crb
+    highavailability
+    nfv
+    rt
+    resilientstorage
+  )
 
-include_recipe 'yum-centos'
+  repo_overrides(
+    'crb' => { 'enabled' => true },
+    'highavailability' => { 'enabled' => true },
+    'nfv' => { 'enabled' => true },
+    'rt' => { 'enabled' => true },
+    'resilientstorage' => { 'enabled' => true }
+  )
+end
 ```
 
-## Recipes
+## Migration Notes
 
-- `yum-centos::default` Generates `yum_repository` configs for latest CentOS release. By default the `base`, `extras`,
-  and `updates` repos are enabled on CentOS 7. For CentOS 8 and CentOS Stream 8, `base`, `extras` and `appstream` repos
-  are enabled by default.
-
-**NOTE**: If you are running an older CentOS release, i.e. 7.7 when 7.8 is the latest 7.x release, you may want to consider the `yum-centos::vault` recipe.
-
-```ruby
-  yum_repository 'base' do
-    mirrorlist 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os'
-    description 'CentOS-$releasever - Base'
-    enabled true
-    gpgcheck true
-    gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-$releasever'
-  end
-```
-
-- `yum-centos::vault` Generate yum configuration for non-current versions of CentOS. Instead of using `mirrorlist`, `baseurl` is set to `http://vault.centos.org/...`.
-
-## Usage Example
-
-To disable the CentOS Extras repository through a Role or Environment definition
-
-```ruby
-default_attributes(
-  'yum' => {
-    'extras' => {
-      'enabled' => {
-        false
-       }
-     }
-   }
- )
-```
-
-Uncommonly used repositoryids are not managed by default. This is speeds up integration testing pipelines by avoiding yum-cache builds that nobody cares about. To enable the CentOS Plus repository with a wrapper cookbook, place the following in a recipe:
-
-```ruby
-node.default['yum']['centosplus']['managed'] = true
-node.default['yum']['centosplus']['enabled'] = true
-include_recipe 'yum-centos'
-```
-
-## More Examples
-
-Point the base and updates repositories at an internally hosted server.
-
-```ruby
-node.default['yum']['base']['enabled'] = true
-node.default['yum']['base']['mirrorlist'] = nil
-node.default['yum']['base']['baseurl'] = 'https://internal.example.com/centos/7/os/x86_64'
-node.default['yum']['base']['sslverify'] = false
-node.default['yum']['updates']['enabled'] = true
-node.default['yum']['updates']['mirrorlist'] = nil
-node.default['yum']['updates']['baseurl'] = 'https://internal.example.com/centos/7/updates/x86_64'
-node.default['yum']['updates']['sslverify'] = false
-
-include_recipe 'yum-centos'
-```
+This cookbook has been fully migrated to custom resources. The legacy recipes and attribute-driven repository definitions were removed, so new and existing consumers should use `yum_centos_repository` or `yum_centos_repositories` directly.
 
 ## Contributors
 

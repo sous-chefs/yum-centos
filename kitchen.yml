@@ -1,224 +1,36 @@
+---
 driver:
   name: vagrant
 
 provisioner:
-  name: chef_zero
+  name: chef_infra
+  product_name: chef
+  product_version: <%= ENV['CHEF_VERSION'] || 'latest' %>
+  channel: stable
+  install_strategy: once
+  chef_license: accept
+  enforce_idempotency: <%= ENV['ENFORCE_IDEMPOTENCY'] || true %>
+  multiple_converge: <%= ENV['MULTIPLE_CONVERGE'] || 2 %>
   deprecations_as_errors: true
-  chef_license: accept-no-persist
+  log_level: <%= ENV['CHEF_LOG_LEVEL'] || 'auto' %>
 
 verifier:
   name: inspec
 
 platforms:
-  - name: centos-7
-  - name: centos-stream-8
+  - name: centos-stream-9
+  - name: centos-stream-10
 
 suites:
   - name: default
     run_list:
-      - recipe[yum-centos::default]
-  - name: vault
-    run_list:
-      - recipe[yum-centos::vault]
-    excludes:
-      - centos-stream-8
+      - recipe[test::default]
+    verifier:
+      inspec_tests:
+        - path: test/integration/default
   - name: all
     run_list:
-      - recipe[yum-centos::default]
-    attributes:
-      yum:
-        contrib:
-          managed: true
-          enabled: true
-        centosplus:
-          managed: true
-          enabled: true
-        fasttrack:
-          managed: true
-          enabled: true
-        cr:
-          managed: true
-          enabled: true
-        powertools:
-          managed: true
-          enabled: true
-        debuginfo:
-          managed: true
-          enabled: true
-        highavailability:
-          managed: true
-          enabled: true
-        realtime:
-          managed: true
-          enabled: true
-        resilientstorage:
-          managed: true
-          enabled: true
-        centos-advanced-virtualization:
-          managed: true
-          enabled: true
-        centos-advanced-virtualization-testing:
-          managed: true
-          enabled: true
-        centos-advanced-virtualization-debuginfo:
-          managed: true
-          enabled: true
-        centos-ansible:
-          managed: true
-          enabled: true
-        centos-ansible-testing:
-          managed: true
-          enabled: true
-        centos-ansible-debuginfo:
-          managed: true
-          enabled: true
-        centos-azure:
-          managed: true
-          enabled: true
-        centos-azure-testing:
-          managed: true
-          enabled: true
-        centos-ceph:
-          managed: true
-          enabled: true
-        centos-ceph-testing:
-          managed: true
-          enabled: true
-        centos-dotnet:
-          managed: true
-          enabled: true
-        centos-fdio:
-          managed: true
-          enabled: true
-        centos-fdio-testing:
-          managed: true
-          enabled: true
-        centos-kernel:
-          managed: true
-          enabled: true
-        centos-gluster:
-          managed: true
-          enabled: true
-        centos-gluster-testing:
-          managed: true
-          enabled: true
-        centos-hyperscale:
-          managed: true
-          enabled: true
-        centos-hyperscale-experimental:
-          managed: true
-          enabled: true
-        centos-hyperscale-hotfixes:
-          managed: true
-          enabled: true
-        centos-hyperscale-spin:
-          managed: true
-          enabled: true
-        centos-nfs-ganesha:
-          managed: true
-          enabled: true
-        centos-nfs-ganesha-testing:
-          managed: true
-          enabled: true
-        centos-nfv-common:
-          managed: true
-          enabled: true
-        centos-nfv-common-testing:
-          managed: true
-          enabled: true
-        centos-nfv-extras:
-          managed: true
-          enabled: true
-        centos-nfv-extras-testing:
-          managed: true
-          enabled: true
-        centos-nfv-extras-debuginfo:
-          managed: true
-          enabled: true
-        centos-openshift-origin:
-          managed: true
-          enabled: true
-        centos-openshift-origin-testing:
-          managed: true
-          enabled: true
-        centos-openshift-origin-debuginfo:
-          managed: true
-          enabled: true
-        centos-openstack:
-          managed: true
-          enabled: true
-        centos-openstack-testing:
-          managed: true
-          enabled: true
-        centos-openstack-debuginfo:
-          managed: true
-          enabled: true
-        centos-opstools:
-          managed: true
-          enabled: true
-        centos-opstools-testing:
-          managed: true
-          enabled: true
-        centos-ovirt:
-          managed: true
-          enabled: true
-        centos-ovirt-testing:
-          managed: true
-          enabled: true
-        centos-ovirt-debuginfo:
-          managed: true
-          enabled: true
-        centos-qemu-ev:
-          managed: true
-          enabled: true
-        centos-qemu-ev-testing:
-          managed: true
-          enabled: true
-        centos-qpid-proton:
-          managed: true
-          enabled: true
-        centos-qpid-proton-testing:
-          managed: true
-          enabled: true
-        centos-qpid-proton-debuginfo:
-          managed: true
-          enabled: true
-        centos-rabbitmq:
-          managed: true
-          enabled: true
-        centos-rabbitmq-testing:
-          managed: true
-          enabled: true
-        centos-rabbitmq-debuginfo:
-          managed: true
-          enabled: true
-        centos-samba:
-          managed: true
-          enabled: true
-        centos-samba-testing:
-          managed: true
-          enabled: true
-        centos-sclo:
-          managed: true
-          enabled: true
-        centos-sclo-testing:
-          managed: true
-          enabled: true
-        centos-sclo-debuginfo:
-          managed: true
-          enabled: true
-        centos-sclo-rh:
-          managed: true
-          enabled: true
-        centos-sclo-rh-testing:
-          managed: true
-          enabled: true
-        centos-sclo-rh-debuginfo:
-          managed: true
-          enabled: true
-        centos-virt-xen:
-          managed: true
-          enabled: true
-        centos-virt-xen-testing:
-          managed: true
-          enabled: true
+      - recipe[test::all]
+    verifier:
+      inspec_tests:
+        - path: test/integration/all

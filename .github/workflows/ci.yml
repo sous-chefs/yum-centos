@@ -23,22 +23,18 @@ jobs:
     strategy:
       matrix:
         os:
-          - "centos-7"
-          - "centos-stream-8"
+          - "centos-stream-9"
+          - "centos-stream-10"
         suite:
           - "default"
-          - "vault"
           - "all"
-        exclude:
-          - os: centos-stream-8
-            suite: vault
       fail-fast: false
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v5
-      - name: Install Chef
-        uses: actionshub/chef-install@main
+        uses: actions/checkout@v6
+      - name: Install Cinc Workstation
+        uses: sous-chefs/.github/.github/actions/install-workstation@main
       - name: Dokken
         uses: actionshub/test-kitchen@main
         env:
@@ -47,9 +43,3 @@ jobs:
         with:
           suite: ${{ matrix.suite }}
           os: ${{ matrix.os }}
-      - name: Print debug output on failure
-        if: failure()
-        run: |
-          set -x
-          sudo journalctl -l --since today
-          KITCHEN_LOCAL_YAML=kitchen.dokken.yml /usr/bin/kitchen exec ${{ matrix.suite }}-${{ matrix.os }} -c "journalctl -l"
