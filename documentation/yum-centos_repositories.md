@@ -4,18 +4,14 @@ Manage a collection of CentOS Stream 9/10 repositories and optionally purge the 
 
 ## Actions
 
-| Action | Description |
-|--------|-------------|
-| `:create` | Purges stock repo files and converges the selected repo IDs (default) |
-| `:delete` | Removes the selected repo IDs |
+- `:create`: Purges stock repo files and converges the selected repo IDs.
+- `:delete`: Removes the selected repo IDs.
 
 ## Properties
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `repo_ids` | Array | built-in defaults | Repo ids to manage. Defaults to `appstream`, `baseos`, and `extras-common` |
-| `repo_overrides` | Hash | `{}` | Per-repo property overrides keyed by repo id |
-| `purge_vendor_files` | true, false | `true` | Deletes `/etc/yum.repos.d/centos.repo` and `/etc/yum.repos.d/centos-addons.repo` before creating managed repos |
+- `repo_ids`: `Array`, default built-in defaults. Repo ids to manage. Defaults to `appstream`, `baseos`, and `extras-common`.
+- `repo_overrides`: `Hash`, default `{}`. Per-repo property overrides keyed by repo id.
+- `purge_vendor_files`: `true, false`, default `true`. Deletes `/etc/yum.repos.d/centos.repo` and `/etc/yum.repos.d/centos-addons.repo` before creating managed repos.
 
 ## Examples
 
