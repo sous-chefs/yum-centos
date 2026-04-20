@@ -57,6 +57,25 @@ describe 'yum_centos_repositories' do
     end
   end
 
+  context 'with enable_repo_ids on centos-stream-9' do
+    platform 'centos-stream', '9'
+
+    recipe do
+      yum_centos_repositories 'default-plus-optionals' do
+        enable_repo_ids %w(highavailability realtime)
+      end
+    end
+
+    it 'keeps the default repo set and enables the requested optional repos' do
+      %w(baseos appstream extras-common).each do |repo_id|
+        expect(chef_run).to create_yum_repository(repo_id)
+      end
+
+      expect(chef_run).to create_yum_repository('highavailability').with(enabled: true)
+      expect(chef_run).to create_yum_repository('rt').with(enabled: true)
+    end
+  end
+
   context 'on ubuntu' do
     platform 'ubuntu', '24.04'
 

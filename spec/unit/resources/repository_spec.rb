@@ -63,6 +63,22 @@ describe 'yum_centos_repository' do
     end
   end
 
+  context 'with a legacy alias on centos-stream-9' do
+    platform 'centos-stream', '9'
+
+    recipe do
+      yum_centos_repository 'realtime' do
+        enabled true
+      end
+    end
+
+    it 'maps the alias to the canonical stream repo id' do
+      expect(chef_run).to create_yum_repository('rt').with(
+        enabled: true
+      )
+    end
+  end
+
   context 'on ubuntu' do
     platform 'ubuntu', '24.04'
 

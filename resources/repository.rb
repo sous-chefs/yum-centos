@@ -11,8 +11,12 @@ property :repo_id, String, name_property: true
 action_class do
   include YumCentos::Cookbook::Helpers
 
+  def canonical_repo_id
+    @canonical_repo_id ||= resolve_centos_repo_id(new_resource.repo_id)
+  end
+
   def merged_repo_definition(variant)
-    defaults = centos_repo_definition(new_resource.repo_id, variant: variant)
+    defaults = centos_repo_definition(canonical_repo_id, variant: variant)
 
     {
       description: new_resource.description || defaults[:description],
@@ -65,7 +69,7 @@ action :delete do
   return unless centos_stream_platform?
 
   %i(main debug source).each do |variant|
-    yum_repository centos_repo_identifier(new_resource.repo_id, variant) do
+    yum_repository centos_repo_identifier(canonical_repo_id, variant) do
       action :remove
     end
   end

@@ -27,6 +27,14 @@ This cookbook now officially supports CentOS Stream 9 and CentOS Stream 10 only.
 
 Use `yum_centos_repository` to manage one repo and `yum_centos_repositories` to manage the default or full set. For lifecycle and architecture limits, see [LIMITATIONS.md](LIMITATIONS.md).
 
+Legacy names that map cleanly to current Stream repo IDs are also accepted:
+
+- `base` -> `baseos`
+- `extras` -> `extras-common`
+- `powertools` -> `crb`
+- `realtime` -> `rt`
+- `centos-nfv` and `centos-nfv-extras` -> `nfv`
+
 ## Requirements
 
 ### Platforms
@@ -63,34 +71,27 @@ yum_centos_repository 'crb' do
 end
 ```
 
+Enable one optional repo while keeping the default managed set:
+
+```ruby
+yum_centos_repositories 'default-plus-ha' do
+  enable_repo_ids %w(highavailability)
+end
+```
+
 Manage the full supported repo catalog:
 
 ```ruby
 yum_centos_repositories 'all' do
-  repo_ids %w(
-    baseos
-    appstream
-    extras-common
-    crb
-    highavailability
-    nfv
-    rt
-    resilientstorage
-  )
-
-  repo_overrides(
-    'crb' => { 'enabled' => true },
-    'highavailability' => { 'enabled' => true },
-    'nfv' => { 'enabled' => true },
-    'rt' => { 'enabled' => true },
-    'resilientstorage' => { 'enabled' => true }
-  )
+  enable_repo_ids %w(crb highavailability nfv rt resilientstorage)
 end
 ```
 
 ## Migration Notes
 
 This cookbook has been fully migrated to custom resources. The legacy recipes and attribute-driven repository definitions were removed, so new and existing consumers should use `yum_centos_repository` or `yum_centos_repositories` directly.
+
+The old cookbook also exposed many CentOS Linux 7/8 SIG and versioned repos. Those are not part of the current top-level Stream 9/10 repo set, so this cookbook now models only the official Stream repo IDs that CentOS publishes directly. Versioned SIG repos under `mirror.stream.centos.org/SIGs/...` will need separate modeling if we decide to support them later.
 
 ## Contributors
 

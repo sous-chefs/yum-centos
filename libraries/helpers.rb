@@ -54,8 +54,21 @@ module YumCentos
         },
       }.freeze
 
+      LEGACY_REPO_ALIASES = {
+        'base' => 'baseos',
+        'extras' => 'extras-common',
+        'powertools' => 'crb',
+        'realtime' => 'rt',
+        'centos-nfv' => 'nfv',
+        'centos-nfv-extras' => 'nfv',
+      }.freeze
+
       DEFAULT_REPO_IDS = REPO_CATALOG.filter_map do |repo_id, definition|
         repo_id if definition[:default_enabled]
+      end.freeze
+
+      OPTIONAL_REPO_IDS = REPO_CATALOG.filter_map do |repo_id, definition|
+        repo_id unless definition[:default_enabled]
       end.freeze
 
       VENDOR_REPO_PATHS = %w(
@@ -75,14 +88,27 @@ module YumCentos
         DEFAULT_REPO_IDS
       end
 
+      def centos_optional_repo_ids
+        OPTIONAL_REPO_IDS
+      end
+
+      def centos_legacy_repo_aliases
+        LEGACY_REPO_ALIASES
+      end
+
       def centos_vendor_repo_paths
         VENDOR_REPO_PATHS
       end
 
-      def centos_repo_definition(repo_id, variant: :main)
-        raise ArgumentError, "Unsupported yum-centos repo id #{repo_id}" unless REPO_CATALOG.key?(repo_id)
+      def resolve_centos_repo_id(repo_id)
+        LEGACY_REPO_ALIASES.fetch(repo_id.to_s, repo_id.to_s)
+      end
 
-        definition = REPO_CATALOG[repo_id]
+      def centos_repo_definition(repo_id, variant: :main)
+        resolved_repo_id = resolve_centos_repo_id(repo_id)
+        raise ArgumentError, "Unsupported yum-centos repo id #{repo_id}" unless REPO_CATALOG.key?(resolved_repo_id)
+
+        definition = REPO_CATALOG[resolved_repo_id]
         variant_suffix =
           case variant
           when :debug
@@ -106,7 +132,7 @@ module YumCentos
         arch = variant == :source ? 'source' : '$basearch'
 
         {
-          repositoryid: centos_repo_identifier(repo_id, variant),
+          repositoryid: centos_repo_identifier(resolved_repo_id, variant),
           description: "CentOS Stream $releasever - #{definition[:label]}#{variant_suffix}",
           metalink: "https://mirrors.centos.org/metalink?repo=centos-#{definition[:slug]}#{slug_suffix}-$stream&arch=#{arch}&protocol=https,http",
           gpgkey: centos_repo_gpgkey(definition[:gpgkey_type]),

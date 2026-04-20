@@ -35,6 +35,18 @@ describe YumCentos::Cookbook::Helpers do
     expect(helper.centos_default_repo_ids).to eq(%w(appstream baseos extras-common))
   end
 
+  it 'returns the optional supported repo ids' do
+    helper = helper_class.new(centos_stream_9_node)
+    expect(helper.centos_optional_repo_ids).to eq(%w(crb highavailability nfv resilientstorage rt))
+  end
+
+  it 'maps legacy repo names to the current stream repo ids' do
+    helper = helper_class.new(centos_stream_9_node)
+    expect(helper.resolve_centos_repo_id('powertools')).to eq('crb')
+    expect(helper.resolve_centos_repo_id('realtime')).to eq('rt')
+    expect(helper.resolve_centos_repo_id('centos-nfv-extras')).to eq('nfv')
+  end
+
   it 'uses the CentOS official key for Stream 9 core repos' do
     helper = helper_class.new(centos_stream_9_node)
     expect(helper.centos_repo_definition('baseos')[:gpgkey]).to eq(

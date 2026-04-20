@@ -10,6 +10,7 @@ Manage a collection of CentOS Stream 9/10 repositories and optionally purge the 
 ## Properties
 
 - `repo_ids`: `Array`, default built-in defaults. Repo ids to manage. Defaults to `appstream`, `baseos`, and `extras-common`.
+- `enable_repo_ids`: `Array`, default `[]`. Additional repo ids to manage and enable without restating the default repo set.
 - `repo_overrides`: `Hash`, default `{}`. Per-repo property overrides keyed by repo id.
 - `purge_vendor_files`: `true, false`, default `true`. Deletes `/etc/yum.repos.d/centos.repo` and `/etc/yum.repos.d/centos-addons.repo` before creating managed repos.
 
@@ -25,23 +26,22 @@ yum_centos_repositories 'default'
 
 ```ruby
 yum_centos_repositories 'all' do
-  repo_ids %w(
-    baseos
-    appstream
-    extras-common
-    crb
-    highavailability
-    nfv
-    rt
-    resilientstorage
-  )
+  enable_repo_ids %w(crb highavailability nfv rt resilientstorage)
+end
+```
 
-  repo_overrides(
-    'crb' => { 'enabled' => true },
-    'highavailability' => { 'enabled' => true },
-    'nfv' => { 'enabled' => true },
-    'rt' => { 'enabled' => true },
-    'resilientstorage' => { 'enabled' => true }
-  )
+### Enable one optional repo without restating the defaults
+
+```ruby
+yum_centos_repositories 'default-plus-ha' do
+  enable_repo_ids %w(highavailability)
+end
+```
+
+### Legacy alias names accepted for current official Stream repos
+
+```ruby
+yum_centos_repositories 'default-plus-legacy-aliases' do
+  enable_repo_ids %w(powertools realtime)
 end
 ```

@@ -38,6 +38,14 @@ yum_centos_repository 'crb' do
 end
 ```
 
+### Use a legacy alias for a current Stream repo
+
+```ruby
+yum_centos_repository 'realtime' do
+  enabled true
+end
+```
+
 ### Pass through extra yum options
 
 ```ruby

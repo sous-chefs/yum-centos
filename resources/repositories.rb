@@ -7,17 +7,41 @@ include YumCentos::Cookbook::Helpers
 property :repo_ids, Array,
          coerce: proc { |value| Array(value).map(&:to_s) },
          default: lazy { centos_default_repo_ids }
+property :enable_repo_ids, Array,
+         coerce: proc { |value| Array(value).map(&:to_s) },
+         default: []
 property :repo_overrides, Hash, default: {}
 property :purge_vendor_files, [true, false], default: true, desired_state: false
 
 action_class do
   include YumCentos::Cookbook::Helpers
 
-  def validated_repo_ids
-    unsupported_repo_ids = new_resource.repo_ids - centos_supported_repo_ids
+  def validate_repo_ids(repo_ids)
+    unsupported_repo_ids = repo_ids - centos_supported_repo_ids
     raise ArgumentError, "Unsupported yum-centos repo ids: #{unsupported_repo_ids.sort.join(', ')}" unless unsupported_repo_ids.empty?
 
-    new_resource.repo_ids
+    repo_ids
+  end
+
+  def validated_repo_ids
+    @validated_repo_ids ||= validate_repo_ids(
+      new_resource.repo_ids.map { |repo_id| resolve_centos_repo_id(repo_id) }.uniq
+    )
+  end
+
+  def validated_enable_repo_ids
+    @validated_enable_repo_ids ||= validate_repo_ids(
+      new_resource.enable_repo_ids.map { |repo_id| resolve_centos_repo_id(repo_id) }.uniq
+    )
+  end
+
+  def managed_repo_ids
+    (validated_repo_ids + validated_enable_repo_ids).uniq
+  end
+
+  def repo_properties_for(repo_id)
+    default_properties = validated_enable_repo_ids.include?(repo_id) ? { 'enabled' => true } : {}
+    default_properties.merge(new_resource.repo_overrides.fetch(repo_id, {}))
   end
 end
 
@@ -32,9 +56,9 @@ action :create do
     end
   end
 
-  validated_repo_ids.each do |repo_id|
+  managed_repo_ids.each do |repo_id|
     yum_centos_repository repo_id do
-      new_resource.repo_overrides.fetch(repo_id, {}).each do |property_name, property_value|
+      repo_properties_for(repo_id).each do |property_name, property_value|
         public_send(property_name, property_value)
       end
     end
@@ -44,7 +68,7 @@ end
 action :delete do
   return unless centos_stream_platform?
 
-  validated_repo_ids.each do |repo_id|
+  managed_repo_ids.each do |repo_id|
     yum_centos_repository repo_id do
       action :delete
     end
