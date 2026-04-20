@@ -2,6 +2,23 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## [6.0.0](https://github.com/sous-chefs/yum-centos/compare/v5.2.12...v6.0.0) (2026-04-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Custom Resources ([#78](https://github.com/sous-chefs/yum-centos/issues/78))
+
+### Features
+
+* migrate to Custom Resources ([#78](https://github.com/sous-chefs/yum-centos/issues/78)) ([6c4b66e](https://github.com/sous-chefs/yum-centos/commit/6c4b66e0bbb0a36a1674ee253d1cc03c55a16a63))
+
+
+### Bug Fixes
+
+* **ci:** pass release workflow slack secrets ([4c2bd1d](https://github.com/sous-chefs/yum-centos/commit/4c2bd1daee88ef4495f465d5a7ba2d0996fe7877))
+* **ci:** Update workflows to use release pipeline ([#75](https://github.com/sous-chefs/yum-centos/issues/75)) ([39a1064](https://github.com/sous-chefs/yum-centos/commit/39a10641423d3ceeda0ac5ab44083d59a78922a7))
+
 ## [5.2.12](https://github.com/sous-chefs/yum-centos/compare/5.2.11...v5.2.12) (2025-10-16)
 
 
