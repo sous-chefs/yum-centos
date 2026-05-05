@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the yum-centos cookbook.
 
+## [6.1.0](https://github.com/sous-chefs/yum-centos/compare/v6.0.0...v6.1.0) (2026-05-05)
+
+
+### Features
+
+* prepare yum-centos for release ([#82](https://github.com/sous-chefs/yum-centos/issues/82)) ([36a5faf](https://github.com/sous-chefs/yum-centos/commit/36a5fafc2c2a7083af31f19373a9c7642b0a3909))
+
 ## [6.0.0](https://github.com/sous-chefs/yum-centos/compare/v5.2.12...v6.0.0) (2026-04-20)
 
 
