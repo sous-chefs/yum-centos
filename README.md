@@ -16,45 +16,45 @@ The yum-centos cookbook manages the DNF repository definitions that ship with Ce
 
 This cookbook now officially supports CentOS Stream 9 and CentOS Stream 10 only. The supported repo IDs are:
 
-- `baseos`
-- `appstream`
-- `extras-common`
-- `crb`
-- `highavailability`
-- `nfv`
-- `rt`
-- `resilientstorage`
+* `baseos`
+* `appstream`
+* `extras-common`
+* `crb`
+* `highavailability`
+* `nfv`
+* `rt`
+* `resilientstorage`
 
 Use `yum_centos_repository` to manage one repo and `yum_centos_repositories` to manage the default or full set. For lifecycle and architecture limits, see [LIMITATIONS.md](LIMITATIONS.md).
 For migration help from the old attribute-driven cookbook, see [MIGRATION.md](MIGRATION.md).
 
 Legacy names that map cleanly to current Stream repo IDs are also accepted:
 
-- `base` -> `baseos`
-- `extras` -> `extras-common`
-- `powertools` -> `crb`
-- `realtime` -> `rt`
-- `centos-nfv` and `centos-nfv-extras` -> `nfv`
+* `base` -> `baseos`
+* `extras` -> `extras-common`
+* `powertools` -> `crb`
+* `realtime` -> `rt`
+* `centos-nfv` and `centos-nfv-extras` -> `nfv`
 
 ## Requirements
 
 ### Platforms
 
-- CentOS Stream 9
-- CentOS Stream 10
+* CentOS Stream 9
+* CentOS Stream 10
 
 ### Chef
 
-- Chef 16.10+
+* Chef 16.10+
 
 ### Cookbooks
 
-- none
+* none
 
 ## Resources
 
-- [yum_centos_repository](documentation/yum-centos_repository.md) manages a single CentOS Stream repo definition.
-- [yum_centos_repositories](documentation/yum-centos_repositories.md) manages the default or full supported repo set.
+* [yum_centos_repository](documentation/yum-centos_repository.md) manages a single CentOS Stream repo definition.
+* [yum_centos_repositories](documentation/yum-centos_repositories.md) manages the default or full supported repo set.
 
 ## Usage
 
