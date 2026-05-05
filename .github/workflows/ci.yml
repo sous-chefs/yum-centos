@@ -34,9 +34,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v6
       - name: Install Cinc Workstation
-        uses: sous-chefs/.github/.github/actions/install-workstation@main
-      - name: Dokken
-        uses: actionshub/test-kitchen@main
+        uses: sous-chefs/.github/.github/actions/install-workstation@6.0.0
+      - name: Run Test Kitchen
+        uses: actionshub/test-kitchen@3.0.0
         env:
           CHEF_LICENSE: accept-no-persist
           KITCHEN_LOCAL_YAML: kitchen.dokken.yml

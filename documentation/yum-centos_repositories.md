@@ -6,15 +6,15 @@ See [MIGRATION.md](../MIGRATION.md) for migration examples from the old `node['y
 
 ## Actions
 
-- `:create`: Purges stock repo files and converges the selected repo IDs.
-- `:delete`: Removes the selected repo IDs.
+* `:create`: Purges stock repo files and converges the selected repo IDs.
+* `:delete`: Removes the selected repo IDs.
 
 ## Properties
 
-- `repo_ids`: `Array`, default built-in defaults. Repo ids to manage. Defaults to `appstream`, `baseos`, and `extras-common`.
-- `enable_repo_ids`: `Array`, default `[]`. Additional repo ids to manage and enable without restating the default repo set.
-- `repo_overrides`: `Hash`, default `{}`. Per-repo property overrides keyed by repo id.
-- `purge_vendor_files`: `true, false`, default `true`. Deletes `/etc/yum.repos.d/centos.repo` and `/etc/yum.repos.d/centos-addons.repo` before creating managed repos.
+* `repo_ids`: `Array`, default built-in defaults. Repo ids to manage. Defaults to `appstream`, `baseos`, and `extras-common`.
+* `enable_repo_ids`: `Array`, default `[]`. Additional repo ids to manage and enable without restating the default repo set.
+* `repo_overrides`: `Hash`, default `{}`. Per-repo property overrides keyed by repo id.
+* `purge_vendor_files`: `true, false`, default `true`. Deletes `/etc/yum.repos.d/centos.repo` and `/etc/yum.repos.d/centos-addons.repo` before creating managed repos.
 
 ## Examples
 

@@ -2,8 +2,8 @@
 
 The old `yum-centos` cookbook combined two patterns:
 
-- node attributes under `node['yum'][repo_id]`
-- the `yum-centos::default` recipe, which created repositories for every repo marked as managed
+* node attributes under `node['yum'][repo_id]`
+* the `yum-centos::default` recipe, which created repositories for every repo marked as managed
 
 The current cookbook is resource-driven instead. There are no recipes or attribute files to include or override. You now declare the repositories you want directly in recipe code.
 
@@ -123,12 +123,12 @@ end
 
 Some old names map cleanly to current official CentOS Stream repo IDs. These aliases are still accepted:
 
-- `base` -> `baseos`
-- `extras` -> `extras-common`
-- `powertools` -> `crb`
-- `realtime` -> `rt`
-- `centos-nfv` -> `nfv`
-- `centos-nfv-extras` -> `nfv`
+* `base` -> `baseos`
+* `extras` -> `extras-common`
+* `powertools` -> `crb`
+* `realtime` -> `rt`
+* `centos-nfv` -> `nfv`
+* `centos-nfv-extras` -> `nfv`
 
 Example:
 
@@ -148,9 +148,9 @@ Those are not part of the current top-level official CentOS Stream 9/10 repo set
 
 In practice:
 
-- official Stream repo IDs that CentOS publishes directly are supported here
-- old versioned SIG repos are not automatically recreated by this migration
-- if you still need one of those SIG repos, it should be modeled explicitly in a separate cookbook or in a future targeted expansion of `yum-centos`
+* official Stream repo IDs that CentOS publishes directly are supported here
+* old versioned SIG repos are not automatically recreated by this migration
+* if you still need one of those SIG repos, it should be modeled explicitly in a separate cookbook or in a future targeted expansion of `yum-centos`
 
 ## Recommended Migration Strategy
 

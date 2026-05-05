@@ -1,4 +1,6 @@
 config:
+  ul-style:
+    style: asterisk
   ul-indent: false # MD007
   line-length: false # MD013
   no-duplicate-heading: false # MD024
@@ -7,3 +9,4 @@ config:
     maximum: 2
 ignores:
   - .github/copilot-instructions.md
+  - .windsurf/**

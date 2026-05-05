@@ -52,7 +52,7 @@ module YumCentos
           default_enabled: false,
           gpgkey_type: :official,
         },
-      }.freeze
+      }.freeze unless const_defined?(:REPO_CATALOG)
 
       LEGACY_REPO_ALIASES = {
         'base' => 'baseos',
@@ -61,20 +61,20 @@ module YumCentos
         'realtime' => 'rt',
         'centos-nfv' => 'nfv',
         'centos-nfv-extras' => 'nfv',
-      }.freeze
+      }.freeze unless const_defined?(:LEGACY_REPO_ALIASES)
 
       DEFAULT_REPO_IDS = REPO_CATALOG.filter_map do |repo_id, definition|
         repo_id if definition[:default_enabled]
-      end.freeze
+      end.freeze unless const_defined?(:DEFAULT_REPO_IDS)
 
       OPTIONAL_REPO_IDS = REPO_CATALOG.filter_map do |repo_id, definition|
         repo_id unless definition[:default_enabled]
-      end.freeze
+      end.freeze unless const_defined?(:OPTIONAL_REPO_IDS)
 
       VENDOR_REPO_PATHS = %w(
         /etc/yum.repos.d/centos.repo
         /etc/yum.repos.d/centos-addons.repo
-      ).freeze
+      ).freeze unless const_defined?(:VENDOR_REPO_PATHS)
 
       def centos_stream_platform?
         node['platform'] == 'centos' && node['platform_version'].to_i >= 9
