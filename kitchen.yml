@@ -29,6 +29,8 @@ suites:
       inspec_tests:
         - path: test/integration/default
   - name: all
+    provisioner:
+      named_run_list: all
     run_list:
       - recipe[test::all]
     verifier:

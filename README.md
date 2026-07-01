@@ -25,7 +25,7 @@ This cookbook now officially supports CentOS Stream 9 and CentOS Stream 10 only.
 * `rt`
 * `resilientstorage`
 
-Use `yum_centos_repository` to manage one repo and `yum_centos_repositories` to manage the default or full set. For lifecycle and architecture limits, see [LIMITATIONS.md](LIMITATIONS.md).
+Use `yum_centos_repository` to manage one repo and `yum_centos_repositories` to manage the default or full set. For lifecycle and architecture limits, see [AGENTS.md](AGENTS.md).
 For migration help from the old attribute-driven cookbook, see [MIGRATION.md](MIGRATION.md).
 
 Legacy names that map cleanly to current Stream repo IDs are also accepted:

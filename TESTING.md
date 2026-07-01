@@ -3,7 +3,7 @@
 Install Cinc Workstation or Chef Workstation, then install the local integration cookbook:
 
 ```shell
-berks install --only integration
+chef install Policyfile.rb
 ```
 
 Run lint and the unit test suite:
